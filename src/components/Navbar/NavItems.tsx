@@ -35,12 +35,18 @@ const NavItems = () => {
           
        
       <div className="flex items-center ">
-        <PopupButton
+        {/* <PopupButton
           url="https://calendly.com/bittu-ad"
           rootElement={rootElement!}
           text="Book Demo"
           className="font-semibold relative hover:after:w-[100%] after:absolute after:content-[''] after:h-[3px] after:w-[100%] after:bg-[#FB9100] after:bottom-[-5px] after:left-0 after:transition-all after:rounded-2xl"
-        />
+        /> */}
+        <Link
+          href="/contact"
+          className="font-semibold relative hover:after:w-[100%] after:absolute after:content-[''] after:h-[3px] after:w-[100%] after:bg-[#FB9100] after:bottom-[-5px] after:left-0 after:transition-all after:rounded-2xl"
+        >
+          Book demo
+        </Link>
       </div>
     </div>
   );
