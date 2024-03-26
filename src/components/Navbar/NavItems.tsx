@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { NAV_ITEMS } from "@/config";
 import NavItem from "./NavItem";
 import { PopupButton } from "react-calendly";
+import Link from "next/link";
 
 const NavItems = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -17,23 +18,21 @@ const NavItems = () => {
 
   return (
     <div className="flex gap-6 h-full">
-    
-          {NAV_ITEMS.map((item, index) => {
-            const setActive = (index: number) => {
-              if (activeIndex !== index) {
-                setActiveIndex(index);
-              }
-            };
-            return (
-              <NavItem
-                navitems={item}
-                key={item.value}
-                activeIndex={() => setActive(index)}
-              />
-            );
-          })}
-          
-       
+      {NAV_ITEMS.map((item, index) => {
+        const setActive = (index: number) => {
+          if (activeIndex !== index) {
+            setActiveIndex(index);
+          }
+        };
+        return (
+          <NavItem
+            navitems={item}
+            key={item.value}
+            activeIndex={() => setActive(index)}
+          />
+        );
+      })}
+
       <div className="flex items-center ">
         {/* <PopupButton
           url="https://calendly.com/bittu-ad"
