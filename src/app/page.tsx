@@ -13,7 +13,6 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 // Static Images
 import TeamsBig from "../../public/TeamsBig.webp";
-import { map } from "zod";
 
 const CaseStudySlider = dynamic(
   () => import("@/components/CaseStudySlider/CaseStudySlider")

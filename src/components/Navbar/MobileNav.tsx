@@ -329,38 +329,37 @@ const MobileNav = () => {
                         <ul>
                           {item.subItems &&
                             item.subItems.map((subItem) => (
-                              <li
-                                className="flex items-center gap-2 py-1"
+                              <Link
+                                href={subItem.href}
                                 onClick={() => toggleMobileNav()}
                                 key={subItem.name}
                               >
-                                <MaxWidthWrapper>
-                                  <div className="w-3 h-3 rounded-full bg-[#ddd]"></div>
-                                  <Link
-                                    href={subItem.href}
-                                    className="text-base"
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                </MaxWidthWrapper>
-                              </li>
+                                <li>
+                                  <MaxWidthWrapper className="flex items-center gap-2 py-1">
+                                    <div className="w-3 h-3 rounded-full bg-[#ddd]"></div>
+                                    <span className="text-base">
+                                      {subItem.name}
+                                    </span>
+                                  </MaxWidthWrapper>
+                                </li>
+                              </Link>
                             ))}
                           {item.childrens &&
                             item.childrens.map((subItem) => (
-                              <MaxWidthWrapper key={subItem.name}>
-                                <li
-                                  className="flex items-center gap-2 py-1"
-                                  onClick={() => toggleMobileNav()}
-                                >
-                                  <div className="w-3 h-3 rounded-full bg-[#ddd]"></div>
-                                  <Link
-                                    href={subItem.href}
-                                    className="text-base"
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                </li>
-                              </MaxWidthWrapper>
+                              <Link
+                                key={subItem.name}
+                                href={subItem.href}
+                                onClick={() => toggleMobileNav()}
+                              >
+                                <MaxWidthWrapper>
+                                  <li className="flex items-center gap-2 py-1">
+                                    <div className="w-3 h-3 rounded-full bg-[#ddd]"></div>
+                                    <span className="text-base">
+                                      {subItem.name}
+                                    </span>
+                                  </li>
+                                </MaxWidthWrapper>
+                              </Link>
                             ))}
                         </ul>
                       )}

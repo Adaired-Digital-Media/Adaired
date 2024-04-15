@@ -36,6 +36,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full">
+      <head>
+      <link
+          rel="icon"
+          href="/assets/ad_favicon.png"
+          type="image/x-icon"
+        />
+        <link
+          rel="shortcut icon"
+          href="/assets/ad_favicon.png"
+          type="image/x-icon"
+        />
+      </head>
       <body
         id="root"
         className={cn(

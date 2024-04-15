@@ -4,8 +4,9 @@ import { Icons } from "../Icons/Icons";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import AnimatedLinks from "./AnimatedLinks";
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { formatDate, ClientRemoveTags } from "@/lib/utils";
 type NavItems = (typeof NAV_ITEMS)[number];
 
 interface NavItemProps {
@@ -15,6 +16,8 @@ interface NavItemProps {
 
 const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
   const [submenuClicked, setSubmenuClicked] = useState(false);
+  const [blogs, setBlogs] = useState([]);
+  console.log(blogs);
 
   const handleSubmenuClick = () => {
     setSubmenuClicked(!submenuClicked);
@@ -23,6 +26,17 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
   const OnMouseEnter = () => {
     setSubmenuClicked(false);
   };
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog?limit=1&skip=0`
+      );
+      const data = await res.json();
+      setBlogs(data.result);
+    };
+    fetchBlogs();
+  }, []);
 
   return (
     <div className="flex justify-center" onMouseEnter={OnMouseEnter}>
@@ -69,24 +83,21 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
                         {subItem.subItems
                           ? subItem.subItems.map((subSubItem) => {
                               return (
-                                <li
-                                  className="flex items-center cursor-pointer group/subMenu "
+                                <Link
                                   key={subSubItem.name}
+                                  href={subSubItem.href}
+                                  onClick={handleSubmenuClick}
                                 >
-                                  <div
-                                    className="flex items-center gap-2 py-1 group-hover/subMenu:text-[#FB9100] transition-all duration-300 "
-                                    onClick={handleSubmenuClick}
-                                  >
-                                    <div className="w-[13px] h-[13px] rounded-sm bg-[#ddd]"></div>
-                                    <Link
-                                      href={subSubItem.href}
-                                      className="text-base flex"
-                                    >
-                                      {subSubItem.name}
-                                    </Link>
-                                  </div>
-                                  <Icons.ArrowRightBroken className="text-[#FB9100] -translate-x-2 opacity-0 group-hover/subMenu:opacity-100 group-hover/subMenu:block group-hover/subMenu:translate-x-2 transition-all duration-500" />
-                                </li>
+                                  <li className="flex items-center cursor-pointer group/subMenu ">
+                                    <div className="flex items-center gap-2 py-1 group-hover/subMenu:text-[#FB9100] transition-all duration-300 ">
+                                      <div className="w-[13px] h-[13px] rounded-sm bg-[#ddd]"></div>
+                                      <span className="text-base flex">
+                                        {subSubItem.name}
+                                      </span>
+                                    </div>
+                                    <Icons.ArrowRightBroken className="text-[#FB9100] -translate-x-2 opacity-0 group-hover/subMenu:opacity-100 group-hover/subMenu:block group-hover/subMenu:translate-x-2 transition-all duration-500" />
+                                  </li>
+                                </Link>
                               );
                             })
                           : null}
@@ -94,7 +105,39 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
                     </div>
                   ))}
                 </div>
-                <div className="bg-[#f3fdff] flex-none w-3/12"></div>
+                <div className="flex-none w-3/12 ">
+                  {blogs.map((blog: any) => (
+                    <div key={blog.title}>
+                      <div className="relative overflow-hidden h-full rounded-2xl transition duration-200 group bg-white hover:shadow-xl border border-zinc-100">
+                        <div className="w-full aspect-w-16 aspect-h-10 bg-gray-100 rounded-tr-lg rounded-tl-lg overflow-hidden xl:aspect-w-16 xl:aspect-h-10 relative">
+                          <Image
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}blog/${blog.image}`}
+                            alt="thumbnail"
+                            width={800}
+                            height={400}
+                            className={`group-hover:scale-95 group-hover:rounded-2xl transform object-cover transition duration-200 `}
+                          />
+                        </div>
+                        <div className=" p-4">
+                          <h2 className="font-bold my-4 text-lg text-zinc-700">
+                            {blog.title}
+                          </h2>
+                          <h2 className="font-normal my-4 text-sm text-zinc-500 line-clamp-4">
+                            {ClientRemoveTags(blog.description)}
+                          </h2>
+                          <div className="flex flex-row justify-between items-center mt-10">
+                            <span className="text-sm text-gray-500">
+                              {formatDate(blog.createdAt)}
+                            </span>
+                            <div className="relative z-10 px-6 py-2 bg-black text-white font-bold rounded-xl block text-xs">
+                              <Link href={`/blog/${blog.slug}`}>Read Blog</Link>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
