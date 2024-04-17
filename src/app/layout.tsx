@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar/Navbar";
 import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/Footer/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import SmoothScroll from "@/components/SmoothScroll/SmoothScroll";
+import Script from "next/script";
 
 const nunito = Nunito_Sans({
   subsets: ["latin"],
@@ -37,25 +37,29 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
-        <meta
-          name="google-site-verification"
-          content="IbErkjWfX4xDEzZjtgtMruxBWkCYRs6n19e55PaEtLw"
-        />
         <link rel="icon" href="/assets/ad_favicon.png" type="image/x-icon" />
         <link
           rel="shortcut icon"
           href="/assets/ad_favicon.png"
           type="image/x-icon"
         />
-        <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5ZWYZ5BF47"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-5ZWYZ5BF47');
-</script> 
+        <meta
+          name="google-site-verification"
+          content="IbErkjWfX4xDEzZjtgtMruxBWkCYRs6n19e55PaEtLw"
+        />
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-5ZWYZ5BF47"
+        />
+        <Script id="google-analytics">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5ZWYZ5BF47');
+  `}
+        </Script>
       </head>
       <body
         id="root"
