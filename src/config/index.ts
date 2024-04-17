@@ -208,7 +208,7 @@ export const NAV_ITEMS = [
     childrens: [
       {
         name: "Career",
-        href: "/career",
+        href: "https://career.adaired.com/jobs/Careers",
       },
       {
         name: "Case Studies",

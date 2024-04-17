@@ -14,6 +14,7 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 // Static Images
 import TeamsBig from "../../public/TeamsBig.webp";
 
+// Dynamic Imports
 const CaseStudySlider = dynamic(
   () => import("@/components/CaseStudySlider/CaseStudySlider")
 );
