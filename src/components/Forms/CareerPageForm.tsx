@@ -55,7 +55,7 @@ const CareerPageForm = () => {
         </pre>
       ),
     });
-    console.log(values);
+    // console.log(values);
     form.reset();
   }
 

@@ -17,7 +17,7 @@ interface NavItemProps {
 const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
   const [submenuClicked, setSubmenuClicked] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  console.log(blogs);
+  // console.log(blogs);
 
   const handleSubmenuClick = () => {
     setSubmenuClicked(!submenuClicked);
