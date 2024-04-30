@@ -11,11 +11,6 @@ import BlogWPagination from "@/components/BlogWithPagination/BlogWPagination";
 async function getBlogs() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog`,
-    {
-      next: {
-        revalidate: 1,
-      },
-    }
   );
   const data = await res.json();
   return data;

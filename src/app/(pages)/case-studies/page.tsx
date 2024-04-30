@@ -8,11 +8,6 @@ import { Suspense } from "react";
 async function getCaseStudyCategories() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/case-studies-category/getCaseStudiesCategory/all`,
-    {
-      next: {
-        revalidate: 1,
-      },
-    }
   );
   const data = await res.json();
   return data.result;
