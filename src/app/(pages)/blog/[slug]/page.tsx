@@ -14,15 +14,15 @@ async function getBlogs({ params }: { params: { slug: string } }) {
   return data.result[0];
 }
 
-// export async function generateStaticParams() {
-//   const res = await fetch(
-//     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog`
-//   ).then((res) => res.json());
-//   const blogs = res.result;
-//   return blogs.map((blog: any) => ({
-//     slug: blog.slug.toString(),
-//   }));
-// }
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog`
+  ).then((res) => res.json());
+  const blogs = res.result;
+  return blogs.map((blog: any) => ({
+    slug: blog.slug.toString(),
+  }));
+}
 
 interface BlogProps {
   params: {
