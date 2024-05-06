@@ -6,6 +6,17 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import parse from "html-react-parser";
+import CaseStudies from "../page";
+
+export async function generateStaticParams() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/case-studies/all`
+  ).then((res) => res.json());
+  const CaseStudies = res.result;
+  return CaseStudies.map((CaseStudy: any) => ({
+    slug: CaseStudy.slug.toString(),
+  }));
+}
 
 async function getCaseStudyData({ slug }: { slug: string }) {
   const res = await fetch(

@@ -140,7 +140,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/career" className="">
+                <Link href="https://career.adaired.com/jobs/Careers" className="">
                   Career
                 </Link>
               </li>
