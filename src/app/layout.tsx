@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/Footer/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react"
 
 const nunito = Nunito_Sans({
   subsets: ["latin"],
@@ -71,6 +72,7 @@ export default function RootLayout({
         </main>
         <Toaster />
         <SpeedInsights />
+        <Analytics/>
       </body>
     </html>
   );
