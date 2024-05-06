@@ -83,12 +83,12 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
                         {subItem.subItems
                           ? subItem.subItems.map((subSubItem) => {
                               return (
-                                <Link
-                                  key={subSubItem.name}
-                                  href={subSubItem.href}
-                                  onClick={handleSubmenuClick}
-                                >
-                                  <li className="flex items-center cursor-pointer group/subMenu ">
+                                <li key={subSubItem.name}>
+                                  <Link
+                                    href={subSubItem.href}
+                                    onClick={handleSubmenuClick}
+                                    className="flex items-center cursor-pointer group/subMenu "
+                                  >
                                     <div className="flex items-center gap-2 py-1 group-hover/subMenu:text-[#FB9100] transition-all duration-300 ">
                                       <div className="w-[13px] h-[13px] rounded-sm bg-[#ddd]"></div>
                                       <span className="text-base flex">
@@ -96,8 +96,8 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
                                       </span>
                                     </div>
                                     <Icons.ArrowRightBroken className="text-[#FB9100] -translate-x-2 opacity-0 group-hover/subMenu:opacity-100 group-hover/subMenu:block group-hover/subMenu:translate-x-2 transition-all duration-500" />
-                                  </li>
-                                </Link>
+                                  </Link>
+                                </li>
                               );
                             })
                           : null}
