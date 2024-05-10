@@ -44,10 +44,10 @@ const ContactPageForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof schema>) {
-    if (!executeRecaptcha) {
-      console.log("Execute recaptcha not available yet");
-      return;
-    }
+    // if (!executeRecaptcha) {
+    //   console.log("Execute recaptcha not available yet");
+    //   return;
+    // }
     contactPageFormSubmission(values);
     toast({
       title: "You submitted the following values:",
