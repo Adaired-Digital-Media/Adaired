@@ -15,15 +15,11 @@ export async function POST(request: NextRequest) {
     },
   });
 
+  const adminEmail = process.env.ADMIN_EMAIL || "";
+  const salesAdminEmail = process.env.SALES_ADMIN_EMAIL || "";
   const mailOptions: Mail.Options = {
     from: process.env.SENDER_NAME,
-    to: [
-      "triciagriffin19732@gmail.com",
-      "zulemavub81@yahoo.com",
-      "GabrielleOPLewiswq@outlook.com",
-      "JoanneNLOGreeneY@aol.com",
-      "harsh@adaired.com"
-    ],
+    to: [adminEmail, salesAdminEmail, "zulemavub81@yahoo.com"],
     subject: `Message from ${Name} (${Email})`,
     html: `<h1 class="text-3xl">Message from ${Name}</h1>
       <p>Email: ${Email}</p>

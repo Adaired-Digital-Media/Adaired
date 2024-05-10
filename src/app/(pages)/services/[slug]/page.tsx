@@ -10,7 +10,7 @@ import React from "react";
 import {
   ReactCompareSlider,
   ReactCompareSliderImage,
-} from "react-compare-slider"; 
+} from "react-compare-slider";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/accordion";
 import Button from "@/components/Button/Button";
 import GetInTouchForm from "@/components/Forms/GetInTouchForm";
+import type { Metadata } from "next";
 
 async function getServiceData({ params }: { params: { slug: string } }) {
   const res = await fetch(
@@ -29,6 +30,22 @@ async function getServiceData({ params }: { params: { slug: string } }) {
   const data = await res.json();
   const newData = data.data[0];
   return newData;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await getServiceData({ params });
+  return {
+    title: data.serviceTitle,
+    description: data.serviceDescription,
+    robots: {
+      index: true,
+      follow: false,
+    },
+  };
 }
 
 export async function generateStaticParams() {
