@@ -17,7 +17,10 @@ import { toast } from "@/components/ui/use-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { contactPageFormSubmission } from "@/lib/send-email";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import GoogleCaptchaWrapper from "../GoogleCaptchaWrapper";
 const ContactPageForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const schema = z.object({
     formId: z.string(),
     Name: z.string().min(1, { message: "Name is required" }),
@@ -41,6 +44,10 @@ const ContactPageForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof schema>) {
+    if (!executeRecaptcha) {
+      console.log("Execute recaptcha not available yet");
+      return;
+    }
     contactPageFormSubmission(values);
     toast({
       title: "You submitted the following values:",
