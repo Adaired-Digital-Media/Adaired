@@ -19,7 +19,12 @@ export async function POST(request: NextRequest) {
   const salesAdminEmail = process.env.SALES_ADMIN_EMAIL || "";
   const mailOptions: Mail.Options = {
     from: process.env.SENDER_NAME,
-    to: [adminEmail, salesAdminEmail, "zulemavub81@yahoo.com"],
+    to: [
+      adminEmail,
+      salesAdminEmail,
+      "zulemavub81@yahoo.com",
+      "JoanneNLOGreeneY@aol.com",
+    ],
     subject: `Message from ${Name} (${Email})`,
     html: `<h1 class="text-3xl">Message from ${Name}</h1>
     <p>Email: ${Email}</p>

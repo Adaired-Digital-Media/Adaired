@@ -31,7 +31,12 @@ export async function POST(request: NextRequest) {
 
   const mailOptions: Mail.Options = {
     from: process.env.SENDER_NAME,
-    to: [adminEmail, salesAdminEmail, "zulemavub81@yahoo.com"],
+    to: [
+      adminEmail,
+      salesAdminEmail,
+      "zulemavub81@yahoo.com",
+      "JoanneNLOGreeneY@aol.com",
+    ],
     subject: `New subscriber: ${Email}`,
     html: NewsLetterTemplate({ email: Email }),
   };
