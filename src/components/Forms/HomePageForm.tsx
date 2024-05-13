@@ -28,15 +28,19 @@ import { toast } from "@/components/ui/use-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import Link from "next/link";
-import { homePageFormSubmission } from "@/lib/send-email";
+import { formSubmission } from "@/lib/send-email";
+import { useReCaptcha } from "next-recaptcha-v3";
 import { NAV_ITEMS } from "@/config";
 
 const HomePageForm = () => {
   const data = NAV_ITEMS.find((item) => item.value === "services");
   const services = data?.subItems && data?.subItems.map((item) => item.name);
 
-  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+  // Import 'executeRecaptcha' using 'useReCaptcha' hook
+  const { executeRecaptcha } = useReCaptcha();
+
   const schema = z.object({
+    gRecaptchaToken: z.string(),
     formId: z.string(),
     Name: z.string().min(1, { message: "Name is required" }),
     Email: z
@@ -57,7 +61,8 @@ const HomePageForm = () => {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      formId: "homepageForm",
+      gRecaptchaToken: "",
+      formId: "Homepage Form",
       Name: "",
       Email: "",
       Phone: "",
@@ -68,14 +73,18 @@ const HomePageForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    homePageFormSubmission(values);
-    toast({
-      variant: "default",
-      description: "Your message has been sent successfully",
-    });
-    form.reset();
-  }
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const token = await executeRecaptcha("homepage_form");
+    if (token) {
+      values.gRecaptchaToken = token;
+      formSubmission(values);
+      toast({
+        variant: "default",
+        description: "Your message has been sent successfully",
+      });
+      form.reset();
+    }
+  };
 
   return (
     <div className="bg-white z-2 p-6 rounded-lg">

@@ -1,19 +1,23 @@
 "use client";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
 import { Icons } from "../Icons/Icons";
-import { newsLetterFormSubmission } from "@/lib/send-email";
+import { formSubmission } from "@/lib/send-email";
+import { useReCaptcha } from "next-recaptcha-v3";
 import { toast } from "../ui/use-toast";
 type Inputs = {
+  gRecaptchaToken: string;
   formId: string;
   Email: string;
 };
 const NewsLetter = () => {
-  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+  // Import 'executeRecaptcha' using 'useReCaptcha' hook
+  const { executeRecaptcha } = useReCaptcha();
 
   const schema = z.object({
+    gRecaptchaToken: z.string(),
     formId: z.string(),
     Email: z.string().min(5, { message: "Email is required" }).email(),
   });
@@ -25,40 +29,29 @@ const NewsLetter = () => {
     formState: { errors },
   } = useForm<Inputs>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      gRecaptchaToken: "",
+      formId: "Newsletter Form",
+      Email: "",
+    },
   });
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    newsLetterFormSubmission(data);
-    toast({
-      title: "Subscribed! 🎉",
-      description: "Thank you for subscribing to our newsletter!",
-    });
-
-    try {
-      if (!scriptUrl) {
-        throw new Error("Script URL is not defined");
-      }
-
-      const response = await fetch(scriptUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const token = await executeRecaptcha("newsletter_form");
+    if (token) {
+      values.gRecaptchaToken = token;
+      formSubmission(values);
+      toast({
+        title: "Subscribed! 🎉",
+        description: "Thank you for subscribing to our newsletter!",
       });
-
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.error("There was a problem with your fetch operation:", error);
+      reset();
     }
-    reset();
   };
 
   return (
     <form className="mt-6 relative" action="" onSubmit={handleSubmit(onSubmit)}>
-      <input type="hidden" {...register("formId")} value="newletterForm" />
+      <input type="hidden" {...register("formId")} />
       <input
         type="email"
         placeholder="Enter your email"

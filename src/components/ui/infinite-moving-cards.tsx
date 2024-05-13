@@ -26,7 +26,7 @@ export const InfiniteMovingCards = ({
 
   useEffect(() => {
     addAnimation();
-  }, []);
+  });
   const [start, setStart] = useState(false);
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
@@ -88,7 +88,10 @@ export const InfiniteMovingCards = ({
       >
         {items.map((item, idx) => (
           <li
-            className={cn("w-auto max-w-full relative rounded-2xl border flex-shrink-0 px-8 py-5 flex items-center",itemClassName)}
+            className={cn(
+              "w-auto max-w-full relative rounded-2xl border flex-shrink-0 px-8 py-5 flex items-center",
+              itemClassName
+            )}
             key={item.img}
           >
             <Image src={item.img} alt="logo" width={150} height={50} />

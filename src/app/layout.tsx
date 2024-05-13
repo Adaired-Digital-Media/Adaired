@@ -7,7 +7,8 @@ import { Toaster } from "@/components/ui/toaster";
 import Footer from "@/components/Footer/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 const nunito = Nunito_Sans({
   subsets: ["latin"],
@@ -65,14 +66,16 @@ export default function RootLayout({
           baby.variable
         )}
       >
-        <main>
-          <Navbar />
-          {children}
-          <Footer />
-        </main>
+        <ReCaptchaProvider reCaptchaKey="6Ldc49cpAAAAAPihLfrXDvYhtRKnwZAiKihVICxf">
+          <main>
+            <Navbar />
+            {children}
+            <Footer />
+          </main>
+        </ReCaptchaProvider>
         <Toaster />
         <SpeedInsights />
-        <Analytics/>
+        <Analytics />
       </body>
     </html>
   );

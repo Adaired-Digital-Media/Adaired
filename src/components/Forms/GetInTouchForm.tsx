@@ -6,21 +6,22 @@ import Button from "../Button/Button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "../ui/textarea";
 import { toast } from "@/components/ui/use-toast";
-import Link from "next/link";
-import { getintouchFormSubmission } from "@/lib/send-email";
+import { formSubmission } from "@/lib/send-email";
+import { useReCaptcha } from "next-recaptcha-v3";
 
 function GetInTouchForm() {
-  const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SHEET_URL;
+  // Import 'executeRecaptcha' using 'useReCaptcha' hook
+  const { executeRecaptcha } = useReCaptcha();
+
   const schema = z.object({
+    gRecaptchaToken: z.string(),
     formId: z.string(),
     Name: z.string().min(1, { message: "Name is required" }),
     Email: z
@@ -33,24 +34,29 @@ function GetInTouchForm() {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
-      formId: "getInTouchForm",
+      gRecaptchaToken: "",
+      formId: "Get in Touch Form",
       Name: "",
       Email: "",
       Message: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    getintouchFormSubmission(values);
-    toast({
-      variant: "default",
-      description: "Your message has been sent successfully",
-    });
-    form.reset();
-  }
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const token = await executeRecaptcha("get_in_touch_form");
+    if (token) {
+      values.gRecaptchaToken = token;
+      formSubmission(values);
+      toast({
+        variant: "default",
+        description: "Your message has been sent successfully",
+      });
+      form.reset();
+    }
+  };
+
   return (
     <div className="border p-5 rounded-lg">
-
       <h2 className="text-[1.688rem] md:text-4xl mb-4 inline-block">
         Get In Touch
         <div className="h-0.5 w-3/4 bg-[#BC1D8D]" />

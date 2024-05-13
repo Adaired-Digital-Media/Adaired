@@ -16,12 +16,14 @@ import { Textarea } from "../ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { contactPageFormSubmission } from "@/lib/send-email";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
-import GoogleCaptchaWrapper from "../GoogleCaptchaWrapper";
+import { formSubmission } from "@/lib/send-email";
+import { useReCaptcha } from "next-recaptcha-v3";
 const ContactPageForm = () => {
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  // Import 'executeRecaptcha' using 'useReCaptcha' hook
+  const { executeRecaptcha } = useReCaptcha();
+
   const schema = z.object({
+    gRecaptchaToken: z.string(),
     formId: z.string(),
     Name: z.string().min(1, { message: "Name is required" }),
     Email: z
@@ -35,6 +37,7 @@ const ContactPageForm = () => {
   const form = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: {
+      gRecaptchaToken: "",
       formId: "contactpageForm",
       Name: "",
       Email: "",
@@ -43,22 +46,19 @@ const ContactPageForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof schema>) {
-    // if (!executeRecaptcha) {
-    //   console.log("Execute recaptcha not available yet");
-    //   return;
-    // }
-    contactPageFormSubmission(values);
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      ),
-    });
-    form.reset();
-  }
+  const onSubmit = async (values: z.infer<typeof schema>) => {
+    const token = await executeRecaptcha("contact_page_form");
+    if (token) {
+      values.gRecaptchaToken = token;
+      formSubmission(values);
+      toast({
+        variant: "default",
+        description: "Your message has been sent successfully",
+      });
+      form.reset();
+    }
+  };
+
   return (
     <div>
       <Form {...form}>
