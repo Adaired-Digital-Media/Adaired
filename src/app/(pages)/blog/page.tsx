@@ -7,10 +7,17 @@ import PageBanner from "@/components/PageBanner/PageBanner";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import PopularPosts from "@/components/PopularPosts/PopularPosts";
 import BlogWPagination from "@/components/BlogWithPagination/BlogWPagination";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Read Our Blog for Helpful Tips and Ideas | Adaired",
+  description:
+    "Get easy-to-understand tips and new ideas from Adaired’s blogs. From practical tips to interesting ideas, there is something for everyone. Start exploring today!",
+};
 
 async function getBlogs() {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog`
   );
   const data = await res.json();
   return data;

@@ -4,6 +4,13 @@ import React from "react";
 import { Icons } from "@/components/Icons/Icons";
 import Link from "next/link";
 import ContactPageForm from "@/components/Forms/ContactPageForm";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Adaired – Speak with Our Team Today!",
+  description:
+    "Need to ask something or just want to say hi? Our Contact page is where you can reach out easily. We're here to listen and help. Let's chat!",
+};
 
 const Contact = () => {
   return (

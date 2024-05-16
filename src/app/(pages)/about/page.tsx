@@ -6,6 +6,13 @@ import BlogCards from "@/components/BlogCard/BlogCards";
 import TestimonialSlider from "@/components/TestimonialSlider/TestimonialSlider";
 import { Icons } from "@/components/Icons/Icons";
 import Process from "@/components/Timeline/Process";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Unveiling Adaired: Our History, Team, and Vision | Learn About Us",
+  description:
+    "Get to know Adaired better! Know our history, the people who make it happen, and the goals we aspire to. Experience Adaired's dedication to innovation.",
+};
 const About = () => {
   return (
     <div>

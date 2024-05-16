@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/accordion";
 import Button from "@/components/Button/Button";
 import GetInTouchForm from "@/components/Forms/GetInTouchForm";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   const res = await fetch(
@@ -42,6 +43,23 @@ async function getServiceData({
   const data = await res.json();
   const newData = data.data[0];
   return newData;
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await getServiceData({ params });
+  return {
+    title: data.metaTitle ? data.metaTitle : data.serviceTitle,
+    description: data.metaDescription
+      ? data.metaDescription
+      : data.serviceDescription,
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 interface ChildServiceProps {

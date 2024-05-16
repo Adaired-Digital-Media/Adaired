@@ -4,6 +4,13 @@ import TestimonialSlider from "@/components/TestimonialSlider/TestimonialSlider"
 import BlogCards from "@/components/BlogCard/BlogCards";
 import CaseStudyCards from "@/components/CaseStudyCards/CaseStudyCards";
 import { Suspense } from "react";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Adaired Case Studies: See How We Help Businesses Thrive",
+  description:
+    "Discover how Adaired transformed businesses like yours with simple, engaging case studies highlighting real success. Know how we can support your goals now!",
+};
 
 async function getCaseStudyCategories() {
   const res = await fetch(

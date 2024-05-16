@@ -39,11 +39,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const data = await getServiceData({ params });
   return {
-    title: data.serviceTitle,
-    description: data.serviceDescription,
+    title: data.metaTitle ? data.metaTitle : data.serviceTitle,
+    description: data.metaDescription
+      ? data.metaDescription
+      : data.serviceDescription,
     robots: {
       index: true,
-      follow: false,
+      follow: true,
     },
   };
 }
