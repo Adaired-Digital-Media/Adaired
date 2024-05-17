@@ -119,7 +119,7 @@ const config: Config = {
   plugins: [
     require("tailwindcss-animate"),
     addVariablesForColors,
-    require("'autoprefixer"),
+    require("autoprefixer"),
   ],
 };
 
