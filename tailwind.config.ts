@@ -24,7 +24,7 @@ const config: Config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    "./src/**/*.{html,js}"
+    "./src/**/*.{html,js}",
   ],
   prefix: "",
   theme: {
@@ -116,7 +116,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), addVariablesForColors], 
+  plugins: [
+    require("tailwindcss-animate"),
+    addVariablesForColors,
+    require("'autoprefixer"),
+  ],
 };
 
 export default config;
