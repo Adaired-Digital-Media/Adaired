@@ -130,7 +130,7 @@ importers:
         specifier: ^18
         version: 18.2.22
       autoprefixer:
-        specifier: ^10.0.1
+        specifier: ^10.4.19
         version: 10.4.19(postcss@8.4.38)
       eslint:
         specifier: ^8
