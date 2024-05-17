@@ -41,6 +41,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta
           name="google-site-verification"
           content="IbErkjWfX4xDEzZjtgtMruxBWkCYRs6n19e55PaEtLw"
