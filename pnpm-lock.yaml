@@ -139,10 +139,10 @@ importers:
         specifier: 14.1.0
         version: 14.1.0(eslint@8.57.0)(typescript@5.4.3)
       postcss:
-        specifier: ^8
+        specifier: ^8.4.38
         version: 8.4.38
       tailwindcss:
-        specifier: ^3.3.0
+        specifier: ^3.4.1
         version: 3.4.1
       typescript:
         specifier: ^5
