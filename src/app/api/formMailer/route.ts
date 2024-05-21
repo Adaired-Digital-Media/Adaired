@@ -66,7 +66,7 @@ export async function POST(request: NextRequest) {
 
   const formTemplates: { [key: string]: string } = {
     "Homepage Form": `Name: ${payload.Name}\nEmail: ${payload.Email}\nPhone: ${payload.Phone}\nInterest: ${payload.Interest}\nBudget: ${payload.Budget}\nMessage: ${payload.Message}`,
-    "Contact page From": `Name: ${payload.Name}\nEmail: ${payload.Email}\nMessage: ${payload.Message}\nPhone: ${payload.Phone}`,
+    "Contact page Form": `Name: ${payload.Name}\nEmail: ${payload.Email}\nMessage: ${payload.Message}\nPhone: ${payload.Phone}`,
     "Get in Touch Form": `Name: ${payload.Name}\nEmail: ${payload.Email}\nMessage: ${payload.Message}`,
     "Newsletter Form": `Name: ${payload.Email.split("@").shift()}\nEmail: ${
       payload.Email

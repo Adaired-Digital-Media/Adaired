@@ -5,13 +5,16 @@ import BlogCards from "@/components/BlogCard/BlogCards";
 import CaseStudyCards from "@/components/CaseStudyCards/CaseStudyCards";
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Adaired Case Studies: See How We Help Businesses Thrive",
   description:
     "Discover how Adaired transformed businesses like yours with simple, engaging case studies highlighting real success. Know how we can support your goals now!",
+    alternates: {
+      canonical: "https://adaired.com/case-studies",
+    },
 };
-
 async function getCaseStudyCategories() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/case-studies-category/getCaseStudiesCategory/all`
@@ -47,3 +50,4 @@ const CaseStudies = async () => {
 };
 
 export default CaseStudies;
+

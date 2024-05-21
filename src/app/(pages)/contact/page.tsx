@@ -10,6 +10,9 @@ export const metadata: Metadata = {
   title: "Contact Adaired – Speak with Our Team Today!",
   description:
     "Need to ask something or just want to say hi? Our Contact page is where you can reach out easily. We're here to listen and help. Let's chat!",
+    alternates: {
+      canonical: "https://adaired.com/contact",
+    },
 };
 
 const Contact = () => {
