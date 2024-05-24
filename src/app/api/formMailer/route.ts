@@ -9,10 +9,11 @@ const config = {
   senderPassword: process.env.SENDER_PASSWORD,
   senderName: process.env.SENDER_NAME || "adaired.com",
   adminEmails: [
-    process.env.ADMIN_EMAIL || "",
+    process.env.SUPER_ADMIN_EMAIL || "",
     process.env.SALES_ADMIN_EMAIL || "",
-    process.env.YAHOO_MAIL || "",
-    process.env.AOL_MAIL || "",
+    process.env.SUPPORT_MAIL || "",
+    process.env.DEV_TL_MAIL || "",
+    // process.env.AOL_MAIL || "",
   ],
   recaptchaSecretKey: process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY,
 };
