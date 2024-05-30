@@ -31,8 +31,10 @@ import Link from "next/link";
 import { formSubmission } from "@/lib/send-email";
 import { useReCaptcha } from "next-recaptcha-v3";
 import { NAV_ITEMS } from "@/config";
+import { useRouter } from "next/navigation";
 
 const HomePageForm = () => {
+  const router = useRouter();
   const data = NAV_ITEMS.find((item) => item.value === "services");
   const services = data?.subItems && data?.subItems.map((item) => item.name);
 
@@ -73,16 +75,38 @@ const HomePageForm = () => {
     },
   });
 
+  // const onSubmit = async (values: z.infer<typeof schema>) => {
+  //   const token = await executeRecaptcha("homepage_form");
+  //   if (token) {
+  //     values.gRecaptchaToken = token;
+  //     formSubmission(values);
+  //     toast({
+  //       variant: "default",
+  //       description: "Your message has been sent successfully",
+  //     });
+  //     form.reset();
+  //   }
+  // };
+
   const onSubmit = async (values: z.infer<typeof schema>) => {
     const token = await executeRecaptcha("homepage_form");
     if (token) {
       values.gRecaptchaToken = token;
-      formSubmission(values);
-      toast({
-        variant: "default",
-        description: "Your message has been sent successfully",
-      });
       form.reset();
+      router.push("/thankyou");
+
+      try {
+        const response = await formSubmission(values);
+        if (!response.sendMailSuccess) {
+          router.back();
+          toast({
+            variant: "destructive",
+            description: "Failed to send email",
+          });
+        }
+      } catch (error) {
+        router.back();
+      }
     }
   };
 

@@ -7,7 +7,9 @@ const config = {
   emailHost: process.env.EMAIL_HOST,
   senderEmail: process.env.SENDER_EMAIL,
   senderPassword: process.env.SENDER_PASSWORD,
-  senderName: process.env.SENDER_NAME || "adaired.com",
+  senderName:
+    process.env.SENDER_NAME ||
+    '"Adaired Digital" <info@adaired.com>',
   adminEmails: [
     process.env.SUPER_ADMIN_EMAIL || "",
     process.env.SALES_ADMIN_EMAIL || "",
@@ -94,7 +96,10 @@ export async function POST(request: NextRequest) {
 
   try {
     await sendMail(mailOptions);
-    return NextResponse.json({ message: "Email sent" });
+    return NextResponse.json({
+      sendMailSuccess: true,
+      message: "Email sent successfully",
+    });
   } catch (err) {
     console.error(err);
     return NextResponse.json(

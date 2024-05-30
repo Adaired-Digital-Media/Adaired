@@ -15,8 +15,10 @@ import { Textarea } from "../ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { formSubmission } from "@/lib/send-email";
 import { useReCaptcha } from "next-recaptcha-v3";
+import { useRouter } from "next/navigation";
 
 function GetInTouchForm() {
+  const router = useRouter();
   // Import 'executeRecaptcha' using 'useReCaptcha' hook
   const { executeRecaptcha } = useReCaptcha();
 
@@ -42,16 +44,38 @@ function GetInTouchForm() {
     },
   });
 
+  // const onSubmit = async (values: z.infer<typeof schema>) => {
+  //   const token = await executeRecaptcha("get_in_touch_form");
+  //   if (token) {
+  //     values.gRecaptchaToken = token;
+  //     formSubmission(values);
+  //     toast({
+  //       variant: "default",
+  //       description: "Your message has been sent successfully",
+  //     });
+  //     form.reset();
+  //   }
+  // };
+
   const onSubmit = async (values: z.infer<typeof schema>) => {
     const token = await executeRecaptcha("get_in_touch_form");
     if (token) {
       values.gRecaptchaToken = token;
-      formSubmission(values);
-      toast({
-        variant: "default",
-        description: "Your message has been sent successfully",
-      });
       form.reset();
+      router.push("/thankyou");
+
+      try {
+        const response = await formSubmission(values);
+        if (!response.sendMailSuccess) {
+          router.back();
+          toast({
+            variant: "destructive",
+            description: "Failed to send email",
+          });
+        }
+      } catch (error) {
+        router.back();
+      }
     }
   };
 

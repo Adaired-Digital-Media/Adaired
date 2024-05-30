@@ -18,7 +18,11 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { formSubmission } from "@/lib/send-email";
 import { useReCaptcha } from "next-recaptcha-v3";
+import { useRouter } from "next/navigation";
+
 const ContactPageForm = () => {
+  const router = useRouter();
+
   // Import 'executeRecaptcha' using 'useReCaptcha' hook
   const { executeRecaptcha } = useReCaptcha();
 
@@ -50,12 +54,21 @@ const ContactPageForm = () => {
     const token = await executeRecaptcha("contact_page_form");
     if (token) {
       values.gRecaptchaToken = token;
-      formSubmission(values);
-      toast({
-        variant: "default",
-        description: "Your message has been sent successfully",
-      });
       form.reset();
+      router.push("/thankyou");
+
+      try {
+        const response = await formSubmission(values);
+        if (!response.sendMailSuccess) {
+          router.back();
+          toast({
+            variant: "destructive",
+            description: "Failed to send email",
+          });
+        }
+      } catch (error) {
+        router.back();
+      }
     }
   };
 
