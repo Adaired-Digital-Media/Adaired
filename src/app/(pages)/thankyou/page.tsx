@@ -1,17 +1,11 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
-import {
-  TypewriterEffect,
-  TypewriterEffectSmooth,
-} from "@/components/ui/typewriter-effect";
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-type ThankyouPageProps = {
-  message: string;
-};
 
-const Thankyou: React.FC<ThankyouPageProps> = ({ message }) => {
+const Thankyou= () => {
   const words = [
     {
       text: "Thanks",
