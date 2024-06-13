@@ -12,10 +12,9 @@ const config = {
     '"Adaired Digital" <info@adaired.com>',
   adminEmails: [
     process.env.SUPER_ADMIN_EMAIL || "",
+    process.env.SUPPORT_EMAIL || "",
     process.env.SALES_ADMIN_EMAIL || "",
-    process.env.SUPPORT_MAIL || "",
-    process.env.DEV_TL_MAIL || "",
-    // process.env.AOL_MAIL || "",
+    // process.env.DEV_TL_EMAIL || "", 
   ],
   recaptchaSecretKey: process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY,
 };
