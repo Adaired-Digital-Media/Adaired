@@ -62,7 +62,7 @@ export const NAV_ITEMS = [
           },
           {
             name: "Guest Post Outreach",
-            href: "/services/search-engine-optimization/guest-post-outreach",
+            href: "/services/guest-post-outreach",
           },
           {
             name: "On-Page and Off-Page Optimization",
