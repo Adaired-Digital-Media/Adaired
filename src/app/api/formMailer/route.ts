@@ -1,20 +1,22 @@
 import { type NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
+import HomepageForm from "../emailTemplates/HomepageForm";
+import GetintouchForm from "../emailTemplates/GetintouchForm";
+import ContactpageForm from "../emailTemplates/ContactpageForm";
+import NewsletterForm from "../emailTemplates/NewsletterForm";
 
 // Load and validate environment variables at the start
 const config = {
   emailHost: process.env.EMAIL_HOST,
   senderEmail: process.env.SENDER_EMAIL,
   senderPassword: process.env.SENDER_PASSWORD,
-  senderName:
-    process.env.SENDER_NAME ||
-    '"Adaired Digital" <info@adaired.com>',
+  senderName: process.env.SENDER_NAME || '"Adaired Digital" <info@adaired.com>',
   adminEmails: [
     process.env.SUPER_ADMIN_EMAIL || "",
     process.env.SUPPORT_EMAIL || "",
     process.env.SALES_ADMIN_EMAIL || "",
-    // process.env.DEV_TL_EMAIL || "", 
+    // process.env.DEV_TL_EMAIL || "",
   ],
   recaptchaSecretKey: process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY,
 };
@@ -43,6 +45,7 @@ async function sendMail(mailOptions: Mail.Options): Promise<string> {
     }
   }
 }
+
 export async function POST(request: NextRequest) {
   const payload = await request.json();
 
@@ -66,17 +69,41 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const formTemplates: { [key: string]: string } = {
-    "Homepage Form": `Name: ${payload.Name}\nEmail: ${payload.Email}\nPhone: ${payload.Phone}\nInterest: ${payload.Interest}\nBudget: ${payload.Budget}\nMessage: ${payload.Message}`,
-    "Contact page Form": `Name: ${payload.Name}\nEmail: ${payload.Email}\nMessage: ${payload.Message}\nPhone: ${payload.Phone}`,
-    "Get in Touch Form": `Name: ${payload.Name}\nEmail: ${payload.Email}\nMessage: ${payload.Message}`,
-    "Newsletter Form": `Name: ${payload.Email.split("@").shift()}\nEmail: ${
-      payload.Email
-    }`,
+  const formTemplates: { [key: string]: { html: string } } = {
+    "Homepage Form": {
+      html: HomepageForm({
+        Name: payload.Name,
+        Email: payload.Email,
+        Phone: payload.Phone,
+        Interest: payload.Interest,
+        Budget: payload.Budget,
+        Message: payload.Message,
+      }),
+    },
+    "Contact page Form": {
+      html: ContactpageForm({
+        Name: payload.Name,
+        Email: payload.Email,
+        Phone: payload.Phone,
+        Message: payload.Message,
+      }),
+    },
+    "Get in Touch Form": {
+      html: GetintouchForm({
+        Name: payload.Name,
+        Email: payload.Email,
+        Message: payload.Message,
+      }),
+    },
+    "Newsletter Form": {
+      html: NewsletterForm({
+        Email: payload.Email,
+      }),
+    },
   };
 
-  const mailText = formTemplates[payload.formId];
-  if (!mailText) {
+  const template = formTemplates[payload.formId];
+  if (!template) {
     return NextResponse.json(
       { error: "Invalid request type" },
       { status: 400 }
@@ -90,7 +117,7 @@ export async function POST(request: NextRequest) {
       .replace(/Form$/, "")
       .replace(/([A-Z])/g, " $1")
       .trim()} Form Submission`,
-    text: mailText,
+    html: template.html, // Include HTML content here
   };
 
   try {
