@@ -35,10 +35,10 @@ export async function generateStaticParams() {
 async function getServiceData({
   params,
 }: {
-  params: { slug: string; childSlug?: string };
+  params: { slug: string; };
 }) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/services/${params.slug}/${params.childSlug}`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/services/${params.slug}`
   );
   const data = await res.json();
   const newData = data.data[0];

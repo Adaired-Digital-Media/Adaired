@@ -14,44 +14,62 @@ const Footer = () => {
     <footer className="bg-[#1B5A96] text-white">
       <MaxWidthWrapper className="px-4">
         <div className="grid gap-5 sm:grid-cols-12 py-6">
-          <Link
-            href="https://maps.app.goo.gl/CEMtUbQd1246YQ3c7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex gap-2 col-span-12 p-5 flex-col items-center text-center lg:text-left lg:items-start border lg:flex-row lg:border-0 lg:col-span-5 xl:col-span-6"
-          >
-            <Icons.Map className="flex-none h-12 w-12 border p-2  text-[#FB9100] lg:text-white rounded" />
-            <div>
-              <p>Find Us</p>
-              B-509, 5th Floor, Bestech Business Towers, Sector 66,{" "}
-              <br className="hidden xl:block" />
-              SAS Nagar, Punjab 160066
-            </div>
-          </Link>
-          <Link
-            href="tel:+91-8907400008"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex col-span-12 gap-2 p-5 flex-col items-center text-center lg:text-left lg:items-start border lg:flex-row lg:border-0 sm:col-span-6 lg:col-span-4 xl:col-span-3"
-          >
-            <Icons.Phone className="flex-none h-12 w-12 border p-2  text-[#FB9100] lg:text-white rounded" />
-            <div>
+          <div className="flex gap-2 col-span-12 p-5 flex-col items-center text-center lg:text-left lg:items-start border lg:flex-row lg:border-0 lg:col-span-5 xl:col-span-6">
+            <Link
+              href="https://maps.app.goo.gl/CEMtUbQd1246YQ3c7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icons.Map className="flex-none h-12 w-12 border p-2  text-[#FB9100] lg:text-white rounded" />
+            </Link>
+            <Link
+              href="https://maps.app.goo.gl/CEMtUbQd1246YQ3c7"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <p>Find Us</p>
+                B-509, 5th Floor, Bestech Business Towers, Sector 66,{" "}
+                <br className="hidden xl:block" />
+                SAS Nagar, Punjab 160066
+              </div>
+            </Link>{" "}
+          </div>
+          <div className="flex col-span-12 gap-2 p-5 flex-col items-center text-center lg:text-left lg:items-start border lg:flex-row lg:border-0 sm:col-span-6 lg:col-span-4 xl:col-span-3">
+            <Link
+              href="tel:+91-8907400008"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icons.Phone className="flex-none h-12 w-12 border p-2  text-[#FB9100] lg:text-white rounded" />
+            </Link>
+
+            <Link
+              href="tel:+91-8907400008"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <p>Call Us</p>
               +91-8907400008
-            </div>
-          </Link>
-          <Link
-            href="mailto:info@adaired.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex col-span-12 gap-2 p-5 flex-col items-center text-center lg:text-left lg:items-start border lg:flex-row lg:border-0 sm:col-span-6 lg:col-span-3 xl:col-span-3"
-          >
-            <Icons.Mail className="flex-none h-12 w-12 border p-2  text-[#FB9100] lg:text-white rounded" />
-            <div>
+            </Link>
+          </div>
+          <div className="flex col-span-12 gap-2 p-5 flex-col items-center text-center lg:text-left lg:items-start border lg:flex-row lg:border-0 sm:col-span-6 lg:col-span-3 xl:col-span-3">
+            <Link
+              href="mailto:info@adaired.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icons.Mail className="flex-none h-12 w-12 border p-2  text-[#FB9100] lg:text-white rounded" />
+            </Link>
+            <Link
+              href="mailto:info@adaired.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <p>Mail Us</p>
               info@adaired.com
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
         <div className="border-t pt-6 mx-auto grid grid-cols-1 gap-5 md:grid-cols-12">
           <div className="col-span-12 lg:col-span-4">
@@ -140,7 +158,10 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="https://career.adaired.com/jobs/Careers" className="">
+                <Link
+                  href="https://career.adaired.com/jobs/Careers"
+                  className=""
+                >
                   Career
                 </Link>
               </li>

@@ -51,7 +51,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/v1/services`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/v1/services?all=true`
+  );
   const data = await res.json();
   const newData = data.data;
   return newData.map((service: any) => ({
@@ -82,29 +84,40 @@ const MainService: React.FC<MainServiceProps> = async ({ params }) => {
         menuData={data.childrens}
         slug={data.slug}
       />
-      <MaxWidthWrapper>
-        <Separator className="h-0.5 bg-[#A7A9AC]" />
-      </MaxWidthWrapper>
 
-      <OurProcess
-        ourProcessSubHeading={data.ourProcessSubHeading}
-        ourProcessImage1={data.ourProcessImageI}
-        ourProcessImage2={data.ourProcessImageII}
-      />
+      {data.ourProcessSubHeading && (
+        <>
+          <MaxWidthWrapper>
+            <Separator className="h-0.5 bg-[#A7A9AC]" />
+          </MaxWidthWrapper>
+
+          <OurProcess
+            ourProcessSubHeading={data.ourProcessSubHeading}
+            ourProcessImage1={data.ourProcessImageI}
+            ourProcessImage2={data.ourProcessImageII}
+          />
+        </>
+      )}
 
       <ServiceBuild data={data.combinedSection} />
-      <ServiceParagraph
-        title={data.serviceHeadingIII}
-        description={data.serviceDescriptionIV}
-      />
-      <PinkSection
-        heading={data.LastSectionHeading}
-        text={data.LastSectionText}
-        image={data.LastSectionImage}
-        hookline={data.LastSectionHookLine}
-        points={data.LastSectionPoints}
-      />
-      <Consultation />
+      {data.serviceHeadingIII && (
+        <ServiceParagraph
+          title={data.serviceHeadingIII}
+          description={data.serviceDescriptionIV}
+        />
+      )}
+      {data.LastSectionHeading && (
+        <>
+          <PinkSection
+            heading={data.LastSectionHeading}
+            text={data.LastSectionText}
+            image={data.LastSectionImage}
+            hookline={data.LastSectionHookLine}
+            points={data.LastSectionPoints}
+          />
+          <Consultation />
+        </>
+      )}
 
       <BlogCards />
     </>

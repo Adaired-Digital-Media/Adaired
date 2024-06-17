@@ -20,27 +20,27 @@ export const NAV_ITEMS = [
         subItems: [
           {
             name: "WordPress Development",
-            href: "/services/web-designing-and-development/wordpress-development",
+            href: "/services/wordpress-development",
           },
           {
             name: "Custom web development",
-            href: "/services/web-designing-and-development/custom-web-development",
+            href: "/services/custom-web-development",
           },
           {
             name: "WooCommerce",
-            href: "/services/web-designing-and-development/woocommerce",
+            href: "/services/woocommerce",
           },
           {
             name: "Shopify Development",
-            href: "/services/web-designing-and-development/shopify-development",
+            href: "/services/shopify-development",
           },
           {
             name: "PHP Development",
-            href: "/services/web-designing-and-development/php-development",
+            href: "/services/php-development",
           },
           {
             name: "Laravel Development",
-            href: "/services/web-designing-and-development/laravel-development",
+            href: "/services/laravel-development",
           },
         ],
       },
@@ -50,15 +50,15 @@ export const NAV_ITEMS = [
         subItems: [
           {
             name: "Technical SEO Analysis",
-            href: "/services/search-engine-optimization/technical-seo-analysis",
+            href: "/services/technical-seo-analysis",
           },
           {
             name: "Online Reputation Management",
-            href: "/services/search-engine-optimization/online-reputation-management",
+            href: "/services/online-reputation-management",
           },
           {
             name: "Competitor Backlink Outreach",
-            href: "/services/search-engine-optimization/competitor-backlink-outreach",
+            href: "/services/competitor-backlink-outreach",
           },
           {
             name: "Guest Post Outreach",
@@ -66,11 +66,11 @@ export const NAV_ITEMS = [
           },
           {
             name: "On-Page and Off-Page Optimization",
-            href: "/services/search-engine-optimization/on-page-and-off-page-optimization",
+            href: "/services/on-page-and-off-page-optimization",
           },
           {
             name: "Local SEO (GBP)",
-            href: "/services/search-engine-optimization/local-seo",
+            href: "/services/local-seo",
           },
         ],
       },
@@ -191,11 +191,11 @@ export const NAV_ITEMS = [
         subItems: [
           {
             name: "Social Media Optimization",
-            href: "/services/strategic-social-media-management/social-media-optimization",
+            href: "/services/social-media-optimization",
           },
           {
             name: "Social Media Marketing",
-            href: "/services/strategic-social-media-management/social-media-marketing",
+            href: "/services/social-media-marketing",
           },
         ],
       },
