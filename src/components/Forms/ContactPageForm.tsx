@@ -174,7 +174,7 @@ const ContactPageForm = () => {
           />
           <Button
             title="Send Your Enquiry"
-            className="bg-white text-black mt-10 w-full flex items-center justify-center pl-0 pr-0 hover:pl-0 hover:pr-0"
+            className="bg-white text-black mt-10 w-full flex items-center justify-center pl-0 pr-0 group-hover/btn:pl-0 group-hover/btn:pr-0  "
             svgClassName="bg-[#F89520]  group-hover/btn:right-2"
             type="submit"
           />
