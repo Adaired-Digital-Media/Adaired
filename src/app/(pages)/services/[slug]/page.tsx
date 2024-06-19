@@ -221,7 +221,7 @@ const IntroSection: React.FC<IntroSectionProps> = ({
 
         <aside className="hidden xl:block w-1/4 relative">
           <div className="sticky top-28 space-y-5">
-            <ServicePageMenu data={menuData} parentPage={slug} />
+            <ServicePageMenu data={menuData} />
             <GetInTouchForm />
           </div>
         </aside>
