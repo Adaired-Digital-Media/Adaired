@@ -17,7 +17,6 @@ interface NavItemProps {
 const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
   const [submenuClicked, setSubmenuClicked] = useState(false);
   const [blogs, setBlogs] = useState([]);
-  // console.log(blogs);
 
   const handleSubmenuClick = () => {
     setSubmenuClicked(!submenuClicked);
@@ -30,7 +29,7 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
   useEffect(() => {
     const fetchBlogs = async () => {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog?limit=1&skip=0`
+        `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog?limit=1&skip=10`
       );
       const data = await res.json();
       setBlogs(data.result);
@@ -40,7 +39,9 @@ const NavItem = ({ activeIndex, navitems }: NavItemProps) => {
 
   return (
     <div className="flex justify-center" onMouseEnter={OnMouseEnter}>
-      <div className={cn("flex  items-center group")}>
+      <div
+        className={cn("flex  items-center group")}
+      >
         <Link
           className="gap-1 font-semibold flex items-center h-20 px-2 relative hover:after:w-[100%] after:absolute after:content-[''] after:h-[3px] after:w-[0%] after:bg-[#aaa] after:bottom-0 after:left-0 after:transition-all after:duration-300"
           href={navitems.href}
