@@ -5,6 +5,7 @@ import { formatDate } from "@/lib/utils";
 import parse from "html-react-parser";
 import PageBanner from "@/components/PageBanner/PageBanner";
 import PopularPosts from "@/components/PopularPosts/PopularPosts";
+import type { Metadata } from "next";
 
 async function getBlogs({ params }: { params: { slug: string } }) {
   const res = await fetch(
@@ -13,7 +14,28 @@ async function getBlogs({ params }: { params: { slug: string } }) {
   const data = await res.json();
   return data.result[0];
 }
-
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await getBlogs({ params });
+  return {
+    title: data.metaTitle
+      ? data.metaTitle
+      : `Read Our Blog for Helpful Tips and Ideas | Adaired`,
+    description: data.metaDescription
+      ? data.metaDescription
+      : `Get easy-to-understand tips and new ideas from Adaired’s blogs. From practical tips to interesting ideas, there is something for everyone. Start exploring today!`,
+    alternates: {
+      canonical: `https://adaired.com/blog/${params.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
 export async function generateStaticParams() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/v1/blog/findBlog`

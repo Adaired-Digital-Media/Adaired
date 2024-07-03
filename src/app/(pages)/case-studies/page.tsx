@@ -5,7 +5,6 @@ import BlogCards from "@/components/BlogCard/BlogCards";
 import CaseStudyCards from "@/components/CaseStudyCards/CaseStudyCards";
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Adaired Case Studies: See How We Help Businesses Thrive",

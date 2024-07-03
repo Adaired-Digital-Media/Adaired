@@ -51,11 +51,81 @@ export default function RootLayout({
         />
         <Script id="google-analytics">
           {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-5ZWYZ5BF47');
-  `}
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-5ZWYZ5BF47');
+          `}
+        </Script>
+        <Script type="application/ld+json" id="local-schema">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "AdAired Digital Media",
+              "image": "https://adaired.com/_next/static/media/Logo.441e7f4f.svg",
+              "@id": "",
+              "url": "https://adaired.com/",
+              "telephone": "8907400008",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "5th Floor, Bestech Business Tower, B-509, Parkview Residence Colony, Sector 66, , Sahibzada Ajit Singh Nagar, Punjab",
+                "addressLocality": "Mohali",
+                "postalCode": "160066",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 30.67625162,
+                "longitude": 76.7402769
+              },
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday"
+                ],
+                "opens": "09:30",
+                "closes": "19:00"
+              },
+              "sameAs": [
+                "https://www.facebook.com/adaired.digital/",
+                "https://twitter.com/adaireddigital",
+                "https://www.instagram.com/adaired.digital/",
+                "https://in.linkedin.com/company/adaired",
+                "https://adaired.com/"
+              ]
+            }
+          `}
+        </Script>
+        <Script type="application/ld+json" id="organization-schema">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "AdAired Digital Media",
+              "alternateName": "AdAired Digital Media",
+              "url": "https://adaired.com/",
+              "logo": "https://adaired.com/_next/static/media/Logo.441e7f4f.svg",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "8907400008",
+                "contactType": "customer service",
+                "areaServed": ["IN","US","GB","CA","AU"],
+                "availableLanguage": ["en","Hindi"]
+              },
+              "sameAs": [
+                "https://www.facebook.com/adaired.digital/",
+                "https://twitter.com/adaireddigital",
+                "https://www.instagram.com/adaired.digital/",
+                "https://in.linkedin.com/company/adaired",
+                "https://adaired.com/"
+              ]
+            }
+          `}
         </Script>
       </head>
       <body

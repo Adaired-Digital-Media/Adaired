@@ -43,6 +43,9 @@ export async function generateMetadata({
     description: data.metaDescription
       ? data.metaDescription
       : data.serviceDescription,
+      alternates:{
+        canonical: `https://adaired.com/services/${params.slug}`,
+      },
     robots: {
       index: true,
       follow: true,

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import React from "react";
 import parse from "html-react-parser";
-import CaseStudies from "../page";
+import type { Metadata } from "next";
 
 export async function generateStaticParams() {
   const res = await fetch(
@@ -24,6 +24,31 @@ async function getCaseStudyData({ slug }: { slug: string }) {
   );
   const data = await res.json();
   return data.result;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const data = await getCaseStudyData({
+    slug: params.slug,
+  });
+  return {
+    title: data.metaTitle
+      ? data.metaTitle
+      : `Adaired Case Studies: See How We Help Businesses Thrive`,
+    description: data.metaDescription
+      ? data.metaDescription
+      : `Discover how Adaired transformed businesses like yours with simple, engaging case studies highlighting real success. Know how we can support your goals now!`,
+    alternates: {
+      canonical: `https://adaired.com/case-studies/${params.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
 }
 
 async function fetchCaseStudyCategory({ slug }: { slug: string }) {

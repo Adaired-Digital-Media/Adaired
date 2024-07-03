@@ -1,8 +1,4 @@
-import Button from "@/components/Button/Button";
-import Image from "next/image";
 import React from "react";
-import parse from "html-react-parser";
-import { cn, formatDate } from "@/lib/utils";
 import PageBanner from "@/components/PageBanner/PageBanner";
 import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import PopularPosts from "@/components/PopularPosts/PopularPosts";
@@ -13,6 +9,10 @@ export const metadata: Metadata = {
   title: "Read Our Blog for Helpful Tips and Ideas | Adaired",
   description:
     "Get easy-to-understand tips and new ideas from Adaired’s blogs. From practical tips to interesting ideas, there is something for everyone. Start exploring today!",
+    alternates: {
+      canonical: "https://adaired.com/blog",
+    },
+  
 };
 
 async function getBlogs() {

@@ -7,7 +7,6 @@ import TestimonialSlider from "@/components/TestimonialSlider/TestimonialSlider"
 import { Icons } from "@/components/Icons/Icons";
 import Process from "@/components/Timeline/Process";
 import type { Metadata } from "next";
-import { usePathname } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "Unveiling Adaired: Our History, Team, and Vision | Learn About Us",
