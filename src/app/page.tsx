@@ -10,9 +10,16 @@ import BlogCards from "@/components/BlogCard/BlogCards";
 import Link from "next/link";
 import HomePageForm from "@/components/Forms/HomePageForm";
 import { HoverEffect } from "@/components/ui/card-hover-effect";
+import type { Metadata } from "next";
 
 // Static Images
 import TeamsBig from "../../public/TeamsBig.webp";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://adaired.com",
+  },
+};
 
 // Dynamic Imports
 const CaseStudySlider = dynamic(
