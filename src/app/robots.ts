@@ -5,7 +5,6 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
         disallow: [
           "/_next/",
           "/wp-admin",
@@ -20,7 +19,7 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "ChatGPT-user",
-        disallow: [],  // This effectively allows everything for the ChatGPT-user agent
+        disallow: ["/"],  // This disallows everything for the ChatGPT-user agent
       },
     ],
     sitemap: "https://adaired.com/sitemap.xml",
