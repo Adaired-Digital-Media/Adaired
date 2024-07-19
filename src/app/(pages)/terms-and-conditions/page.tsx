@@ -2,6 +2,7 @@ import MaxWidthWrapper from "@/components/MaxWidthWrapper/MaxWidthWrapper";
 import PageBanner from "@/components/PageBanner/PageBanner";
 import Link from "next/link";
 import React, { FC } from "react";
+import type { Metadata } from "next";
 
 interface IProps {}
 
