@@ -5,6 +5,15 @@ import React, { FC } from "react";
 
 interface IProps {}
 
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.adaired.com/terms-and-conditions",
+  },
+  robots:{
+    index:true,
+    follow:true
+},
+};
 const Terms: FC<IProps> = (props) => {
   return (
     <>

@@ -4,7 +4,15 @@ import Link from "next/link";
 import React, { FC } from "react";
 
 interface IProps {}
-
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://www.adaired.com/privacy-policy",
+  },
+  robots:{
+    index:true,
+    follow:true
+},
+};
 const Privacy: FC<IProps> = (props) => {
   return (
     <>

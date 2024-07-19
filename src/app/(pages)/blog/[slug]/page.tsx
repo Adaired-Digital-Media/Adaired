@@ -28,7 +28,7 @@ export async function generateMetadata({
       ? data.metaDescription
       : `Get easy-to-understand tips and new ideas from Adaired’s blogs. From practical tips to interesting ideas, there is something for everyone. Start exploring today!`,
     alternates: {
-      canonical: `https://adaired.com/blog/${params.slug}`,
+      canonical: `https://www.adaired.com/blog/${params.slug}`,
     },
     robots: {
       index: true,

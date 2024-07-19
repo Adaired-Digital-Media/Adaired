@@ -13,8 +13,12 @@ export const metadata: Metadata = {
   description:
     "Get to know Adaired better! Know our history, the people who make it happen, and the goals we aspire to. Experience Adaired's dedication to innovation.",
   alternates: {
-    canonical: "https://adaired.com/about",
+    canonical: "https://www.adaired.com/about",
   },
+  robots:{
+    index:true,
+    follow:true
+},
 };
 const About = () => {
   return (

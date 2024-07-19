@@ -16,9 +16,14 @@ import type { Metadata } from "next";
 import TeamsBig from "../../public/TeamsBig.webp";
 
 export const metadata: Metadata = {
-  alternates: {
-    canonical: "https://adaired.com",
+  robots:{
+      index:true,
+      follow:true
   },
+  alternates: {
+    canonical: "https://www.adaired.com",
+  },
+  
 };
 
 // Dynamic Imports

@@ -11,8 +11,12 @@ export const metadata: Metadata = {
   description:
     "Discover how Adaired transformed businesses like yours with simple, engaging case studies highlighting real success. Know how we can support your goals now!",
     alternates: {
-      canonical: "https://adaired.com/case-studies",
+      canonical: "https://www.adaired.com/case-studies",
     },
+    robots:{
+      index:true,
+      follow:true
+  },
 };
 async function getCaseStudyCategories() {
   const res = await fetch(

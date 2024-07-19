@@ -42,7 +42,7 @@ export async function generateMetadata({
       ? data.metaDescription
       : `Discover how Adaired transformed businesses like yours with simple, engaging case studies highlighting real success. Know how we can support your goals now!`,
     alternates: {
-      canonical: `https://adaired.com/case-studies/${params.slug}`,
+      canonical: `https://www.adaired.com/case-studies/${params.slug}`,
     },
     robots: {
       index: true,
