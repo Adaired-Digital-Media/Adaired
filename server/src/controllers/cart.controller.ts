@@ -1,7 +1,7 @@
 import Cart from "../models/cartModel";
 import Product from "../models/product.model";
 import Order from "../models/orderModel";
-import {checkPermission} from "../helpers/authHelper";
+import { checkPermission } from "../helpers/authHelper";
 import { NextFunction, Request, Response } from "express";
 import User from "../models/user.model";
 import { CustomError } from "../middlewares/error";
@@ -15,14 +15,14 @@ const validateCartItems = async (products: CartProduct[]) => {
 
   // Create a map for quick lookup
   const productMap = new Map(
-    existingProducts.map((product) => [product._id.toString(), product])
+    existingProducts.map((product) => [product._id.toString(), product]),
   );
 
   for (const item of products) {
     if (!productMap.has(item.product._id.toString())) {
       throw new CustomError(
         404,
-        `Product with ID ${item.product._id} not found.`
+        `Product with ID ${item.product._id} not found.`,
       );
     }
   }
@@ -31,14 +31,14 @@ const validateCartItems = async (products: CartProduct[]) => {
 // Helper function to handle free products
 const handleFreeProducts = async (
   userId: Types.ObjectId,
-  products: CartProduct[]
+  products: CartProduct[],
 ) => {
   const productIds = products.map((item) => item.product._id);
   const existingProducts = await Product.find({ _id: { $in: productIds } });
 
   // Create a map for quick lookup
   const productMap = new Map(
-    existingProducts.map((product) => [product._id.toString(), product])
+    existingProducts.map((product) => [product._id.toString(), product]),
   );
 
   const freeProductIds = existingProducts
@@ -58,7 +58,7 @@ const handleFreeProducts = async (
     // Check if free products are already in the cart
     if (existingCart) {
       const cartProductIds = existingCart.products.map((item) =>
-        item.product._id.toString()
+        item.product._id.toString(),
       );
 
       for (const productId of freeProductIds) {
@@ -66,7 +66,7 @@ const handleFreeProducts = async (
           const product = productMap.get(productId);
           throw new CustomError(
             400,
-            `You cannot add the free product (${product?.name}) to the cart more than once.`
+            `You cannot add the free product (${product?.name}) to the cart more than once.`,
           );
         }
       }
@@ -78,13 +78,13 @@ const handleFreeProducts = async (
         for (const productId of freeProductIds) {
           if (
             order.products.some(
-              (item) => item.product._id.toString() === productId
+              (item) => item.product._id.toString() === productId,
             )
           ) {
             const product = productMap.get(productId);
             throw new CustomError(
               400,
-              `You have already purchased the free product (${product?.name}).`
+              `You have already purchased the free product (${product?.name}).`,
             );
           }
         }
@@ -98,7 +98,7 @@ const recalculateCartTotals = (cart: any) => {
   cart.totalQuantity = cart.products.length;
   cart.totalPrice = cart.products.reduce(
     (acc: number, product: any) => acc + product.totalPrice,
-    0
+    0,
   );
 };
 
@@ -108,7 +108,7 @@ const recalculateCartTotals = (cart: any) => {
 export const syncOrAddToCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -174,7 +174,7 @@ export const syncOrAddToCart = async (
 export const getUserCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -217,7 +217,7 @@ export const getUserCart = async (
 export const updateCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -234,9 +234,13 @@ export const updateCart = async (
     }
 
     // Find the specific product entry by its unique ID
+    // const productIndex = cart.products.findIndex(
+    //   (p) => p._id.toString() === cartItemId
+    // );
     const productIndex = cart.products.findIndex(
-      (p) => p._id.toString() === cartItemId
+      (p) => p._id?.toString() === cartItemId.toString(),
     );
+
     if (productIndex === -1) {
       return next(new CustomError(404, "Product entry not found in cart."));
     }
@@ -309,7 +313,7 @@ export const updateCart = async (
 export const deleteProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -326,9 +330,13 @@ export const deleteProduct = async (
     }
 
     // Find the product to remove
+    // const productIndex = cart.products.findIndex(
+    //   (p) => p._id.toString() === cartItemId.toString(),
+    // );
     const productIndex = cart.products.findIndex(
-      (p) => p._id.toString() === cartItemId.toString()
+      (p) => p._id?.toString() === cartItemId.toString(),
     );
+
     if (productIndex === -1) {
       return next(new CustomError(404, "Product entry not found in cart."));
     }
@@ -366,7 +374,7 @@ export const deleteProduct = async (
 export const emptyCart = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -399,7 +407,7 @@ export const emptyCart = async (
       return next(new CustomError(404, "User not found"));
     }
 
-    user.cart = null;
+    user.cart = undefined;
 
     // Save the updated user
     await user.save();

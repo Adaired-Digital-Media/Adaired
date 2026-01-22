@@ -29,8 +29,11 @@ const emptyExpiredCarts = async () => {
   }
 };
 
-export const emptyCartJob = cron.schedule('0 * * * *', emptyExpiredCarts, {
-  scheduled: false 
-});
+export const emptyCartJob = cron.schedule(
+  "0 * * * *",
+  emptyExpiredCarts,
+  { scheduled: false } as any
+);
+
 
 export const runEmptyExpiredCartsNow = emptyExpiredCarts;

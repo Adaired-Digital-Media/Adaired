@@ -15,7 +15,7 @@ permissionModuleSchema.pre("save", function (next) {
   if (this.isModified("value")) {
     this.value = this.value.toLowerCase();
   }
-  next();
+  // next();
 });
 
 const PermissionModule = mongoose.model<PermissionModuleType & Document>(

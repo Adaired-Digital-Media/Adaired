@@ -8,14 +8,24 @@ const verifyRoleAndPermission = async (
   req: Request,
   res: Response,
   next: NextFunction,
-  role: RoleTypes[]
+  role: RoleTypes[],
 ) => {
   const ad_access = req.cookies.ad_access;
   if (!ad_access) {
     return next(new CustomError(401, "No token, authorization denied"));
   }
   try {
+    // const payload = jwt.verify(ad_access, process.env.JWT_SECRET) as JwtPayload;
+    if (!ad_access) {
+      throw new CustomError(401, "Access token missing");
+    }
+
+    if (!process.env.JWT_SECRET) {
+      throw new Error("JWT_SECRET is not defined");
+    }
+
     const payload = jwt.verify(ad_access, process.env.JWT_SECRET) as JwtPayload;
+
     const user = await User.findById(payload._id).select("-password");
     if (!user) {
       return next(new CustomError(401, "Token is not valid"));
@@ -23,7 +33,6 @@ const verifyRoleAndPermission = async (
     if (user.isAdmin) {
       next();
     } else {
-      
     }
   } catch (error) {
     next(error);

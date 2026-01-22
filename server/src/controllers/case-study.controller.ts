@@ -13,7 +13,7 @@ import CaseStudy_Category from "../models/case-study-category.model";
 export const createCaseStudy = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -40,8 +40,8 @@ export const createCaseStudy = async (
           400,
           existingCaseStudy.name.toLowerCase() === name.toLowerCase()
             ? "Case study with this name already exists"
-            : "Case study with this slug already exists"
-        )
+            : "Case study with this slug already exists",
+        ),
       );
     }
 
@@ -61,7 +61,7 @@ export const createCaseStudy = async (
       await CaseStudy_Category.findByIdAndUpdate(
         category,
         { $addToSet: { caseStudies: caseStudy._id } },
-        { new: true }
+        { new: true },
       );
     }
 
@@ -93,7 +93,7 @@ export const createCaseStudy = async (
 export const getCaseStudy = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { query } = req;
@@ -130,7 +130,7 @@ export const getCaseStudy = async (
 
       if (!caseStudy) {
         return next(
-          new CustomError(404, "Case study not found with provided ID or slug")
+          new CustomError(404, "Case study not found with provided ID or slug"),
         );
       }
 
@@ -164,7 +164,7 @@ export const getSingleCaseStudy = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     // Validate MongoDB ObjectId (recommended)
-    if (!id || !id.match(/^[0-9a-fA-F]{24}$/)) {
+    if (typeof id !== "string" || !/^[0-9a-fA-F]{24}$/.test(id)) {
       return res.status(400).json({
         success: false,
         message: "Invalid case study ID",
@@ -205,7 +205,7 @@ interface CaseStudyQuery {
 export const updateCaseStudy = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -244,10 +244,10 @@ export const updateCaseStudy = async (
           new CustomError(
             400,
             existingCaseStudy.name.toLowerCase() ===
-            (name || caseStudy.name).toLowerCase()
+              (name || caseStudy.name).toLowerCase()
               ? "Case study with this name already exists"
-              : "Case study with this slug already exists"
-          )
+              : "Case study with this slug already exists",
+          ),
         );
       }
     }
@@ -259,14 +259,14 @@ export const updateCaseStudy = async (
         await CaseStudy_Category.findByIdAndUpdate(
           caseStudy.category,
           { $pull: { caseStudies: id } },
-          { new: true }
+          { new: true },
         );
       }
       // Add to new category
       await CaseStudy_Category.findByIdAndUpdate(
         category,
         { $addToSet: { caseStudies: id } },
-        { new: true }
+        { new: true },
       );
     }
 
@@ -291,7 +291,7 @@ export const updateCaseStudy = async (
       {
         new: true,
         runValidators: true,
-      }
+      },
     )
       .populate("category", "name slug")
       .populate("createdBy", "image name email")
@@ -322,7 +322,7 @@ export const updateCaseStudy = async (
 export const deleteCaseStudy = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, query } = req;
@@ -343,7 +343,7 @@ export const deleteCaseStudy = async (
       await CaseStudy_Category.findByIdAndUpdate(
         caseStudy.category,
         { $pull: { caseStudies: id } },
-        { new: true }
+        { new: true },
       );
     }
 

@@ -30,10 +30,10 @@ const scheduleBlogs = () => {
         console.error("Error in scheduled blog publishing:", error.message);
       }
     },
-    {
-      scheduled: true,
-      timezone: "UTC", 
-    }
+    // {
+    //   scheduled: true,
+    //   timezone: "UTC", 
+    // }
   );
 
   // Start the cron job

@@ -2,7 +2,7 @@ import Service from "../models/serviceModel";
 import { NextFunction, Request, Response } from "express";
 import { CustomError } from "../middlewares/error";
 import slugify from "slugify";
-import {checkPermission} from "../helpers/authHelper";
+import { checkPermission } from "../helpers/authHelper";
 import { validationResult } from "express-validator";
 import { ServiceTypes } from "../types/serviceTypes";
 
@@ -11,7 +11,7 @@ import { ServiceTypes } from "../types/serviceTypes";
 const createService = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -63,7 +63,7 @@ const createService = async (
             },
           },
         },
-        { new: true }
+        { new: true },
       );
     }
 
@@ -81,7 +81,7 @@ const createService = async (
 const readServices = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { identifier } = req.params;
 
@@ -89,6 +89,9 @@ const readServices = async (
     let service;
 
     if (identifier) {
+      if (typeof identifier !== "string") {
+        throw new CustomError(400, "Invalid identifier");
+      }
       // Check if the identifier is a valid MongoDB ObjectId
       if (identifier.match(/^[0-9a-fA-F]{24}$/)) {
         service = await Service.findById(identifier).lean();
@@ -116,7 +119,7 @@ const readServices = async (
 const updateService = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -138,6 +141,9 @@ const updateService = async (
     }
 
     // Check if Slug is already in use
+    if (typeof id !== "string") {
+      throw new CustomError(400, "Invalid service ID");
+    }
     if (body.slug) {
       const existingService = await Service.findOne({
         slug: slugify(body.slug, { lower: true }),
@@ -160,7 +166,7 @@ const updateService = async (
 
     // Remove undefined fields from updateData
     Object.keys(updateData).forEach(
-      (key) => updateData[key] === undefined && delete updateData[key]
+      (key) => updateData[key] === undefined && delete updateData[key],
     );
 
     // Find the current service
@@ -179,7 +185,7 @@ const updateService = async (
         await Service.findByIdAndUpdate(
           currentService.parentService,
           { $pull: { childServices: { childServiceId: id } } },
-          { new: true }
+          { new: true },
         );
       }
 
@@ -197,7 +203,7 @@ const updateService = async (
             },
           },
         },
-        { new: true }
+        { new: true },
       );
     }
 
@@ -225,7 +231,7 @@ const updateService = async (
 const deleteService = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -239,13 +245,13 @@ const deleteService = async (
     const deletedService = await Service.findByIdAndDelete(id);
 
     // Remove service from parent's array
-    if (deletedService.parentService) {
-      const parentService = await Service.findByIdAndUpdate(
-        deletedService.parentService,
-        { $pull: { childServices: { childServiceId: id } } },
-        { new: true }
-      );
-    }
+    // if (deletedService.parentService) {
+    //   const parentService = await Service.findByIdAndUpdate(
+    //     deletedService.parentService,
+    //     { $pull: { childServices: { childServiceId: id } } },
+    //     { new: true },
+    //   );
+    // }
 
     if (!deletedService) {
       return next(new CustomError(404, "Service not found!"));
@@ -264,7 +270,7 @@ const deleteService = async (
 const duplicateService = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -290,7 +296,7 @@ const duplicateService = async (
       slug: `${existingService.slug}-copy`,
       canonicalLink: `https://www.adaired.com/services/${slugify(
         `${existingService.serviceName}-copy`,
-        { lower: true }
+        { lower: true },
       )}`,
     };
 
@@ -310,7 +316,7 @@ const duplicateService = async (
             },
           },
         },
-        { new: true }
+        { new: true },
       );
     }
 

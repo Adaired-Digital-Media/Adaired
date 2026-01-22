@@ -56,7 +56,7 @@ const generateInvoiceHtml = (invoice: any, baseUrl: string): string => {
           item.totalPrice
         }</td>
       </tr>
-    `
+    `,
     )
     .join("");
 
@@ -199,7 +199,7 @@ const generateInvoiceHtml = (invoice: any, baseUrl: string): string => {
             </div>
             <div class="qr-code">
               <img src="https://api.qrserver.com/v1/create-qr-code/?size=112x112&data=${encodeURIComponent(
-                qrCodeValue
+                qrCodeValue,
               )}" alt="QR Code" />
             </div>
           </div>
@@ -253,7 +253,7 @@ const generateInvoiceHtml = (invoice: any, baseUrl: string): string => {
 
 export const createInvoice = async (
   orderId: string,
-  paymentMethod: string
+  paymentMethod: string,
 ): Promise<string> => {
   const order = await Order.findById(orderId).populate("userId");
   if (!order) {
@@ -265,7 +265,9 @@ export const createInvoice = async (
   if (existingInvoice) {
     throw new CustomError(400, "Invoice already exists for this order.");
   }
-
+  if (!order.orderNumber) {
+    throw new CustomError(500, "Order number missing");
+  }
   const invoiceNumber = generateInvoiceNumber(order.orderNumber);
   const dueDate = new Date();
   dueDate.setDate(dueDate.getDate() + 7); // Due in 7 days
@@ -304,7 +306,7 @@ export const createInvoice = async (
 // *********************************************************
 export const updateInvoicePaymentStatus = async (
   orderId: string,
-  paymentStatus: string
+  paymentStatus: string,
 ): Promise<void> => {
   const invoice = await Invoice.findOne({ orderId });
   if (invoice) {
@@ -312,10 +314,10 @@ export const updateInvoicePaymentStatus = async (
       paymentStatus === "Paid"
         ? "Paid"
         : paymentStatus === "Failed"
-        ? "Failed"
-        : paymentStatus === "Refunded"
-        ? "Refunded"
-        : "Unpaid";
+          ? "Failed"
+          : paymentStatus === "Refunded"
+            ? "Refunded"
+            : "Unpaid";
     await Invoice.findByIdAndUpdate(invoice._id, { status: newStatus });
   }
 };
@@ -324,7 +326,7 @@ export const updateInvoicePaymentStatus = async (
 // ************** Delete invoice by orderId ****************
 // *********************************************************
 export const deleteInvoiceByOrderId = async (
-  orderId: string
+  orderId: string,
 ): Promise<void> => {
   await Invoice.findOneAndDelete({ orderId });
 };
@@ -335,7 +337,7 @@ export const deleteInvoiceByOrderId = async (
 export const getInvoices = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -352,7 +354,7 @@ export const getInvoices = async (
       invoices = await Invoice.findOne({ invoiceNumber })
         .populate(
           "userId",
-          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v"
+          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v",
         )
         .populate({
           path: "orderId",
@@ -370,7 +372,7 @@ export const getInvoices = async (
         .sort({ createdAt: -1 })
         .populate(
           "userId",
-          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v"
+          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v",
         )
         .populate({
           path: "orderId",
@@ -391,8 +393,8 @@ export const getInvoices = async (
     next(
       new CustomError(
         500,
-        error instanceof Error ? error.message : "An unknown error occurred."
-      )
+        error instanceof Error ? error.message : "An unknown error occurred.",
+      ),
     );
   }
 };
@@ -403,7 +405,7 @@ export const getInvoices = async (
 export const updateInvoice = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -421,7 +423,7 @@ export const updateInvoice = async (
       updateData,
       {
         new: true,
-      }
+      },
     );
 
     if (!updatedInvoice) {
@@ -437,8 +439,8 @@ export const updateInvoice = async (
     next(
       new CustomError(
         500,
-        error instanceof Error ? error.message : "An unknown error occurred."
-      )
+        error instanceof Error ? error.message : "An unknown error occurred.",
+      ),
     );
   }
 };
@@ -449,7 +451,7 @@ export const updateInvoice = async (
 export const deleteInvoice = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -469,7 +471,7 @@ export const deleteInvoice = async (
     // Remove invoiceId from associated order
     await Order.findOneAndUpdate(
       { invoiceId: deletedInvoice.invoiceNumber },
-      { invoiceId: null }
+      { invoiceId: null },
     );
 
     res
@@ -479,8 +481,8 @@ export const deleteInvoice = async (
     next(
       new CustomError(
         500,
-        error instanceof Error ? error.message : "An unknown error occurred."
-      )
+        error instanceof Error ? error.message : "An unknown error occurred.",
+      ),
     );
   }
 };
@@ -491,7 +493,7 @@ export const deleteInvoice = async (
 export const getInvoicesByUserId = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -502,7 +504,7 @@ export const getInvoicesByUserId = async (
       invoices = await Invoice.findOne({ userId, invoiceNumber })
         .populate(
           "userId",
-          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v"
+          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v",
         )
         .populate({
           path: "orderId",
@@ -523,7 +525,7 @@ export const getInvoicesByUserId = async (
       invoices = await Invoice.find({ userId })
         .populate(
           "userId",
-          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v"
+          "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v",
         )
         .populate({
           path: "orderId",
@@ -549,8 +551,8 @@ export const getInvoicesByUserId = async (
     next(
       new CustomError(
         500,
-        error instanceof Error ? error.message : "An unknown error occurred."
-      )
+        error instanceof Error ? error.message : "An unknown error occurred.",
+      ),
     );
   }
 };
@@ -561,7 +563,7 @@ export const getInvoicesByUserId = async (
 export const getInvoiceStats = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -574,13 +576,13 @@ export const getInvoiceStats = async (
 
     const now = new Date();
     const currentMonthStart = new Date(
-      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1)
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 1),
     );
     const prevMonthEnd = new Date(
-      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0)
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0),
     );
     const prevMonthStart = new Date(
-      Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1),
     );
     const todayStart = new Date(now).setUTCHours(0, 0, 0, 0);
     const todayEnd = new Date(now).setUTCHours(23, 59, 59, 999);
@@ -772,8 +774,8 @@ export const getInvoiceStats = async (
           newInvoicesChange > 0
             ? "increased"
             : newInvoicesChange < 0
-            ? "decreased"
-            : "unchanged",
+              ? "decreased"
+              : "unchanged",
       },
       totalAmount: {
         total: allTimeTotalAmount,
@@ -782,8 +784,8 @@ export const getInvoiceStats = async (
           totalAmountChange > 0
             ? "increased"
             : totalAmountChange < 0
-            ? "decreased"
-            : "unchanged",
+              ? "decreased"
+              : "unchanged",
       },
       finalAmount: {
         total: allTimeFinalAmount,
@@ -792,8 +794,8 @@ export const getInvoiceStats = async (
           finalAmountChange > 0
             ? "increased"
             : finalAmountChange < 0
-            ? "decreased"
-            : "unchanged",
+              ? "decreased"
+              : "unchanged",
       },
       allInvoices,
       paidInvoices,
@@ -823,8 +825,8 @@ export const getInvoiceStats = async (
     next(
       new CustomError(
         500,
-        error instanceof Error ? error.message : "An unknown error occurred."
-      )
+        error instanceof Error ? error.message : "An unknown error occurred.",
+      ),
     );
   }
 };
@@ -835,7 +837,7 @@ export const getInvoiceStats = async (
 export const downloadInvoicePDF = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   let browser: Browser | null = null;
   let page: Page | null = null;
@@ -851,7 +853,7 @@ export const downloadInvoicePDF = async (
     const invoice = await Invoice.findOne({ invoiceNumber })
       .populate(
         "userId",
-        "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v"
+        "-wishlist -orderHistory -refreshToken -createdAt -updatedAt -__v",
       )
       .populate({
         path: "orderId",
@@ -910,12 +912,12 @@ export const downloadInvoicePDF = async (
             img.onload = () => resolve({ src: img.src, status: "loaded" });
             img.onerror = () => {
               console.warn(
-                `[downloadInvoicePDF] Image failed to load: ${img.src}`
+                `[downloadInvoicePDF] Image failed to load: ${img.src}`,
               );
               resolve({ src: img.src, status: "failed" });
             };
           });
-        })
+        }),
       );
     });
 
@@ -934,7 +936,7 @@ export const downloadInvoicePDF = async (
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=Invoice_${invoiceNumber}.pdf`
+      `attachment; filename=Invoice_${invoiceNumber}.pdf`,
     );
     res.setHeader("Content-Length", pdfBuffer.length);
 
@@ -944,8 +946,8 @@ export const downloadInvoicePDF = async (
     next(
       new CustomError(
         500,
-        error instanceof Error ? error.message : "An unknown error occurred."
-      )
+        error instanceof Error ? error.message : "An unknown error occurred.",
+      ),
     );
   }
 };

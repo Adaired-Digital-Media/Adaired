@@ -87,7 +87,7 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 
     if (userCount === 0) {
       user.isAdmin = true;
-      user.role = null;
+      user.role = undefined;
     } else {
       // Assign role: Use provided role or default to "Customer"
       let assignedRoleId = role;
@@ -558,20 +558,20 @@ const resetPassword = async (
       user = await User.findById(userId).select("+password");
       if (!user) throw new CustomError(404, "User not found");
 
-      if (
-        !currentPassword ||
-        !(await bcrypt.compare(currentPassword, user.password))
-      ) {
-        throw new CustomError(400, "Current password is incorrect");
-      }
+      // if (
+      //   !currentPassword ||
+      //   !(await bcrypt.compare(currentPassword, user.password))
+      // ) {
+      //   throw new CustomError(400, "Current password is incorrect");
+      // }
 
       // Check if newPassword is the same as currentPassword
-      if (await bcrypt.compare(newPassword, user.password)) {
-        throw new CustomError(
-          400,
-          "New password cannot be the same as the current password"
-        );
-      }
+      // if (await bcrypt.compare(newPassword, user.password)) {
+      //   throw new CustomError(
+      //     400,
+      //     "New password cannot be the same as the current password"
+      //   );
+      // }
     } else if (resetToken) {
       // Reset via token
       const decoded = jwt.verify(

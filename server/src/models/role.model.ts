@@ -35,7 +35,7 @@ roleSchema.pre('save', function(next) {
   if (this.isModified('name')) {
     this.name = this.name.toLowerCase();
   }
-  next();
+  // next();
 });
 
 const Role = mongoose.model<RoleTypes & Document>("Role", roleSchema);

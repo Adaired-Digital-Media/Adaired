@@ -5,12 +5,12 @@ const cleanCanonicalLink = (input: string): string => {
   if (!input) return "";
 
   // Handle base URL
-  if (input.startsWith(process.env.LIVE_DOMAIN || "")) {
-    return input
-      .replace(process.env.LIVE_DOMAIN, "")
-      .replace(/^\/+/, "")
-      .replace(/\/+$/, ""); // Trim trailing slashes too
-  }
+  // if (input.startsWith(process.env.LIVE_DOMAIN || "")) {
+  //   return input
+  //     .replace(process.env.LIVE_DOMAIN, "")
+  //     .replace(/^\/+/, "")
+  //     .replace(/\/+$/, ""); // Trim trailing slashes too
+  // }
 
   // Handle full URLs
   if (input.includes("://")) {

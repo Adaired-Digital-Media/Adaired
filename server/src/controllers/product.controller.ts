@@ -33,7 +33,7 @@ const updateProductInCategories = async (
   oldCategoryId: Types.ObjectId | null,
   oldSubCategoryIds: Types.ObjectId[] | null,
   newCategoryId: Types.ObjectId | null,
-  newSubCategoryIds: Types.ObjectId[] | null
+  newSubCategoryIds: Types.ObjectId[] | null,
 ) => {
   const updates: Promise<any>[] = [];
 
@@ -42,8 +42,8 @@ const updateProductInCategories = async (
     updates.push(
       Product_Category.updateOne(
         { _id: oldCategoryId },
-        { $pull: { products: productId } }
-      )
+        { $pull: { products: productId } },
+      ),
     );
   }
 
@@ -52,8 +52,8 @@ const updateProductInCategories = async (
     updates.push(
       Product_Category.updateMany(
         { _id: { $in: oldSubCategoryIds } },
-        { $pull: { products: productId } }
-      )
+        { $pull: { products: productId } },
+      ),
     );
   }
 
@@ -62,8 +62,8 @@ const updateProductInCategories = async (
     updates.push(
       Product_Category.updateOne(
         { _id: newCategoryId },
-        { $push: { products: productId } }
-      )
+        { $push: { products: productId } },
+      ),
     );
   }
 
@@ -72,8 +72,8 @@ const updateProductInCategories = async (
     updates.push(
       Product_Category.updateMany(
         { _id: { $in: newSubCategoryIds } },
-        { $push: { products: productId } }
-      )
+        { $push: { products: productId } },
+      ),
     );
   }
 
@@ -87,7 +87,7 @@ const updateProductInCategories = async (
 export const createProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -132,12 +132,12 @@ export const createProduct = async (
           throw new CustomError(404, `Subcategory ${subCatId} not found`);
         }
         const parentCat = await Product_Category.findById(
-          subcategory.parentCategory
+          subcategory.parentCategory,
         );
         if (!parentCat) {
           throw new CustomError(
             404,
-            `Parent category for subcategory ${subCatId} not found`
+            `Parent category for subcategory ${subCatId} not found`,
           );
         }
         subCategoryIds.push(new Types.ObjectId(subCatId));
@@ -151,7 +151,7 @@ export const createProduct = async (
       if (!parentCategories.some((id) => id.equals(categoryId))) {
         throw new CustomError(
           400,
-          "Category must be a parent of at least one subcategory"
+          "Category must be a parent of at least one subcategory",
         );
       }
     }
@@ -173,7 +173,7 @@ export const createProduct = async (
       null,
       null,
       createdProduct.category,
-      subCategoryIds.length > 0 ? subCategoryIds : null
+      subCategoryIds.length > 0 ? subCategoryIds : null,
     );
 
     res.status(201).json({
@@ -192,7 +192,7 @@ export const createProduct = async (
 export const readProducts = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const { id, ...queryParams } = req.query;
   const filter: Record<string, any> = { ...queryParams };
@@ -231,7 +231,7 @@ export const readProducts = async (
 export const updateProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId, body } = req;
@@ -245,7 +245,9 @@ export const updateProduct = async (
 
     // Validate user input
     if (!validateInput(req, res)) return;
-
+    if (!query) {
+      return "";
+    }
     const idString = query.toString();
     const product = await fetchProduct(idString);
     if (!product) {
@@ -275,12 +277,12 @@ export const updateProduct = async (
           throw new CustomError(404, `Subcategory ${subCatId} not found`);
         }
         const parentCat = await Product_Category.findById(
-          subcategory.parentCategory
+          subcategory.parentCategory,
         );
         if (!parentCat) {
           throw new CustomError(
             404,
-            `Parent category for subcategory ${subCatId} not found`
+            `Parent category for subcategory ${subCatId} not found`,
           );
         }
         newSubCategoryIds.push(new Types.ObjectId(subCatId));
@@ -295,7 +297,7 @@ export const updateProduct = async (
         if (!parentCategories.some((id) => id.equals(categoryId))) {
           throw new CustomError(
             400,
-            "Provided category must be a parent of at least one subcategory"
+            "Provided category must be a parent of at least one subcategory",
           );
         }
       } else {
@@ -307,7 +309,7 @@ export const updateProduct = async (
     // Update product in categories if subCategory or category is changing
     const oldSubCategoryIds = product.subCategory
       ? (product.subCategory as unknown as Types.ObjectId[]).map(
-          (id) => new Types.ObjectId(id)
+          (id) => new Types.ObjectId(id),
         )
       : [];
 
@@ -320,7 +322,7 @@ export const updateProduct = async (
         product.category,
         oldSubCategoryIds,
         body.category || product.category,
-        newSubCategoryIds.length > 0 ? newSubCategoryIds : null
+        newSubCategoryIds.length > 0 ? newSubCategoryIds : null,
       );
       if (newSubCategoryIds.length > 0) {
         body.subCategory = newSubCategoryIds.map((id) => id.toString());
@@ -332,7 +334,7 @@ export const updateProduct = async (
     const updatedProduct = await Product.findByIdAndUpdate(
       product._id,
       { $set: body },
-      { new: true }
+      { new: true },
     );
 
     res.status(200).json({
@@ -351,7 +353,7 @@ export const updateProduct = async (
 export const deleteProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -362,7 +364,9 @@ export const deleteProduct = async (
     if (!permissionCheck) {
       throw new CustomError(403, "Permission denied");
     }
-
+    if (!query) {
+      return "";
+    }
     const idString = query.toString();
     const product = await fetchProduct(idString);
     if (!product) {
@@ -372,7 +376,7 @@ export const deleteProduct = async (
     // Remove product from categories
     const oldSubCategoryIds = product.subCategory
       ? (product.subCategory as unknown as Types.ObjectId[]).map(
-          (id) => new Types.ObjectId(id)
+          (id) => new Types.ObjectId(id),
         )
       : [];
 
@@ -381,7 +385,7 @@ export const deleteProduct = async (
       product.category,
       oldSubCategoryIds,
       null,
-      null
+      null,
     );
 
     // Delete the product
@@ -403,7 +407,7 @@ export const deleteProduct = async (
 export const duplicateProduct = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   try {
     const { userId } = req;
@@ -414,7 +418,9 @@ export const duplicateProduct = async (
     if (!permissionCheck) {
       throw new CustomError(403, "Permission denied");
     }
-
+    if (!query) {
+      return "";
+    }
     const idString = query.toString();
     const product = await fetchProduct(idString);
     if (!product) {
@@ -423,7 +429,7 @@ export const duplicateProduct = async (
 
     const subCategoryIds = product.subCategory
       ? (product.subCategory as unknown as Types.ObjectId[]).map(
-          (id) => new Types.ObjectId(id)
+          (id) => new Types.ObjectId(id),
         )
       : [];
 
@@ -448,7 +454,7 @@ export const duplicateProduct = async (
       null,
       null,
       product.category,
-      subCategoryIds.length > 0 ? subCategoryIds : null
+      subCategoryIds.length > 0 ? subCategoryIds : null,
     );
 
     res.status(201).json({
