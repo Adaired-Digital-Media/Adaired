@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
+console.log(process.env.MAIL_USER,"process.env.MAIL_USERNAME")
 export const sendMail = async (req: Request, res: Response) => {
   try {
     const { name, email, phone, message, formId } = req.body;
@@ -10,8 +13,8 @@ export const sendMail = async (req: Request, res: Response) => {
       port: 465,
       secure: true,
       auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
       },
       // tls: {
       //   rejectUnauthorized: false,
@@ -19,7 +22,7 @@ export const sendMail = async (req: Request, res: Response) => {
     });
 
     await transporter.sendMail({
-      from: `"New Inquiry" <${process.env.EMAIL_USERNAME}>`,
+      from: `"New Inquiry" <${process.env.MAIL_USER}>`,
       // to: ["dheeraj@adaired.com", "sahil@adaired.com", "anuj@adaired.org"],
       to: ["anuj@adaired.org"],
 

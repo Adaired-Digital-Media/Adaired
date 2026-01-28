@@ -47,7 +47,7 @@ app.use(`${basePath}/case-study/category`, case_study_category_routes);
 // app.use(`${basePath}/tickets`, ticketRoutes);
 // app.use(`${basePath}/invoices`, invoiceRoutes);
 // app.use(`${basePath}/page-seo`, pageSEORoute);
-app.use(`${basePath}/mailto`, mailRoute);
+app.use(`${basePath}/mail`, mailRoute);
 
 app.use(errorHandler);
 
