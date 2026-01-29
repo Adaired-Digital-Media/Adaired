@@ -1,10 +1,11 @@
+"use client"
 import MaxWidthWrapper from "@/src/components/layout/MaxWidthWrapper";
 import Image from "next/image";
 import { Icons } from "@/src/components/Icons";
 import FooterTop from "./FooterTop";
-import footer_brand_logo from "../../../../../public/assets/brand_logo.png";
-import footer_bg from "../../../../../public/assets/footer_img.png";
-import arrow_white from "../../../../../public/assets/icons/arrow_white.png";
+import footer_brand_logo from "../../../../public/assets/brand_logo.png";
+import footer_bg from "../../../../public/assets/footer_img.png";
+import arrow_white from "../../../../public/assets/icons/arrow_white.png";
 import InputField from "../../../components/UI/InputField";
 import { useState } from "react";
 import { useRouter } from "next/navigation";

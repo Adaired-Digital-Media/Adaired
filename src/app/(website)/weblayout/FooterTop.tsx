@@ -1,9 +1,10 @@
-import Image from 'next/image';
-import React from 'react';
-import map from '../../../public/assets/icons/map.png';
-import call from '../../../public/assets/icons/call.png';
-import mail from '../../../public/assets/icons/mail.png';
-import Link from 'next/link';
+"use client"
+import Image from "next/image";
+import React from "react";
+import map from "../../../../public/assets/icons/map.png";
+import call from "../../../../public/assets/icons/call.png";
+import mail from "../../../../public/assets/icons/mail.png";
+import Link from "next/link";
 
 export interface IFooterTop {
   icon: any;
@@ -14,21 +15,21 @@ export interface IFooterTop {
 const data = [
   {
     icon: map,
-    name: 'Find Us',
-    description: 'B-509, 5th Floor, Bestech Business Towers,',
-    path: 'https://maps.app.goo.gl/CEMtUbQd1246YQ3c7',
+    name: "Find Us",
+    description: "B-509, 5th Floor, Bestech Business Towers,",
+    path: "https://maps.app.goo.gl/CEMtUbQd1246YQ3c7",
   },
   {
     icon: call,
-    name: 'Call Us',
-    description: '91-8907300008',
-    path: 'tel:+91-8907300008',
+    name: "Call Us",
+    description: "91-8907300008",
+    path: "tel:+91-8907300008",
   },
   {
     icon: mail,
-    name: 'Mail Us',
-    description: 'info@adaired.com',
-    path: 'mailto:info@adaired.com',
+    name: "Mail Us",
+    description: "info@adaired.com",
+    path: "mailto:info@adaired.com",
   },
 ];
 const FooterTop = () => {
@@ -37,14 +38,10 @@ const FooterTop = () => {
       {data?.map((item: IFooterTop, idx) => {
         return (
           <div
-            className={`${item?.name === 'Find Us' && 'col-span-2'} flex gap-3 py-2`}
+            key={idx}
+            className={`${item?.name === "Find Us" && "col-span-2"} flex gap-3 py-2`}
           >
-            <Link
-              key={idx}
-              href={item?.path}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={item?.path} target="_blank" rel="noopener noreferrer">
               <Image
                 src={item?.icon}
                 width={50}
@@ -66,9 +63,9 @@ const FooterTop = () => {
                   {item?.description}
                 </p>
                 <p className="cursor-pointer pt-1 text-[20px] font-[600] leading-7 text-white">
-                  {item?.name === 'Find Us'
-                    ? 'Sector 66, SAS Nagar, Punjab 160066'
-                    : ''}
+                  {item?.name === "Find Us"
+                    ? "Sector 66, SAS Nagar, Punjab 160066"
+                    : ""}
                 </p>
               </Link>
             </div>

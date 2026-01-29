@@ -1,4 +1,6 @@
+import FooterTop from "./FooterTop";
 import Header from "./Header";
+import WebFooter from "./WebFooter";
 
 export default function MainWebLayout({
   children,
@@ -13,6 +15,7 @@ export default function MainWebLayout({
       <main id="main" className="flex-1">
         {children}
       </main>
+      <WebFooter/>
     </div>
   );
 }

@@ -27,7 +27,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${montserrat.variable} ${poppins.variable}`}>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased suppressHydrationWarning">{children}</body>
     </html>
   );
 }
