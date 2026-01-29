@@ -5,7 +5,7 @@ import FooterTop from "./FooterTop";
 import footer_brand_logo from "../../../../../public/assets/brand_logo.png";
 import footer_bg from "../../../../../public/assets/footer_img.png";
 import arrow_white from "../../../../../public/assets/icons/arrow_white.png";
-import InputField from "../../components/UI/InputField";
+import InputField from "../../../components/UI/InputField";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";

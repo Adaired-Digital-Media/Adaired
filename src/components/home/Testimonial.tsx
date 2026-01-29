@@ -1,13 +1,13 @@
-'use client';
-import { TestimonialSectionData } from '@/src/@core/data/website/Homepage';
-import { useEffect, useState } from 'react';
-import Heading from '../common/Heading';
-import { MdOutlineStar } from 'react-icons/md';
-import Image from 'next/image';
-import google from '../../../public/assets/upwork_logo.png';
-import useIsMobile from '@/src/@core/hooks/useIsMobile';
-import useBreakpointReviewCharLimit from '@/src/@core/hooks/useBreakpointReviewCharLimit';
-import { useInViewOnce } from '@/src/@core/hooks/useInViewOnce';
+"use client";
+import { TestimonialSectionData } from "@/src/@core/data/website/Homepage";
+import { useEffect, useState } from "react";
+import Heading from "../common/Heading";
+import { MdOutlineStar } from "react-icons/md";
+import Image from "next/image";
+import google from "../../../public/assets/upwork_logo.png";
+import useIsMobile from "@/src/@core/hooks/useIsMobile";
+import useBreakpointReviewCharLimit from "@/src/@core/hooks/useBreakpointReviewCharLimit";
+import { useInViewOnce } from "@/src/@core/hooks/useInViewOnce";
 
 const Testimonial = () => {
   const isMobile = useIsMobile();
@@ -27,27 +27,27 @@ const Testimonial = () => {
     >
       <div className="relative z-20">
         <div
-          className={`flex w-[100%] justify-center transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'} `}
+          className={`flex w-[100%] justify-center transition-all duration-1000 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-12 opacity-0"} `}
         >
           <Heading
             subTitle={subTitle}
             title={title}
-            span={''}
+            span={""}
             description={description}
             isInCenter={true}
             className="w-[90%] lg:w-[65%]"
           />
         </div>
         <div
-          className={`flex justify-center transition-all delay-200 duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'} `}
+          className={`flex justify-center transition-all delay-200 duration-1000 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"} `}
         >
           <div className="relative w-[90%] overflow-x-hidden pt-[2.5rem]">
             {/* Track */}
             <div
               className={`flex ${
                 enableTransition
-                  ? 'transition-transform duration-700 ease-in-out'
-                  : ''
+                  ? "transition-transform duration-700 ease-in-out"
+                  : ""
               }`}
               style={{
                 transform: `translateX(-${index * (100 / VISIBLE_CARDS)}%)`,
@@ -55,7 +55,8 @@ const Testimonial = () => {
             >
               {slides.map((testimonial: any, idx: number) => (
                 <div
-                  className={`relative shrink-0 px-[rem] transition-all duration-700 lg:px-[0.5rem] xl:px-[1rem] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} ${isMobile ? 'basis-full' : 'basis-1/3'} `}
+                  key={idx}
+                  className={`relative shrink-0 px-[rem] transition-all duration-700 lg:px-[0.5rem] xl:px-[1rem] ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} ${isMobile ? "basis-full" : "basis-1/3"} `}
                   style={{
                     transitionDelay: `${(idx % VISIBLE_CARDS) * 120}ms`,
                   }}
@@ -63,9 +64,9 @@ const Testimonial = () => {
                   <div
                     onClick={() =>
                       window.open(
-                        'https://www.upwork.com/agencies/1064740584575918080/',
-                        '_blank',
-                        'noopener,noreferrer'
+                        "https://www.upwork.com/agencies/1064740584575918080/",
+                        "_blank",
+                        "noopener,noreferrer",
                       )
                     }
                     className="h-[23.5rem] transform-gpu cursor-pointer rounded-2xl border-[5px] border-transparent bg-[#FFFFFF] p-[2.5rem] transition-all duration-300 ease-out will-change-transform hover:scale-[1.03] hover:border-[#1B5A96] md:h-[17rem] lg:h-[25rem] lg:p-[1.5rem] xl:p-[2rem] 1360:h-[18rem] 1400:h-[18rem] 1440:h-[22rem] 1600:h-[20rem] 1710:h-[19rem] 3xl:h-[19rem]"
@@ -101,7 +102,7 @@ const Testimonial = () => {
                     </div>
                     <p className="pt-[1rem] text-[#262626]">
                       {testimonial.description?.length > charLimit
-                        ? testimonial.description.slice(0, charLimit) + '...'
+                        ? testimonial.description.slice(0, charLimit) + "..."
                         : testimonial.description}
                     </p>
                   </div>
@@ -118,7 +119,7 @@ const Testimonial = () => {
                       key={i}
                       onClick={() => setIndex(i)}
                       className={`h-2 w-2 rounded-full transition-all ${
-                        activeIndex === i ? 'bg-[#FB9100]' : 'bg-gray-300'
+                        activeIndex === i ? "bg-[#FB9100]" : "bg-gray-300"
                       }`}
                     />
                   );

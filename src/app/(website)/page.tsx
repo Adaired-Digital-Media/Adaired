@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Home from './(website)/home/Home';
+import Home from './home/Home';
 export const metadata: Metadata = {
   title: 'Unveiling Adaired: Our History, Team, and Vision | Learn About Us',
   description:

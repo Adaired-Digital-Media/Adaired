@@ -1,9 +1,8 @@
 "use client";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import logo from "../../../../../public/Layer_1.svg";
-import MaxWidthWrapper from "../../layout/MaxWidthWrapper";
-import Button from "../Button";
+import logo from "../../../../public/Layer_1.svg";
+import MaxWidthWrapper from "@/src/components/layout/MaxWidthWrapper";
 import { routes } from "../../../@core/config/routes";
 import {
   MdKeyboardArrowDown,
@@ -11,11 +10,11 @@ import {
 } from "react-icons/md";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import img from "../../../../../public/assets/triexgagykxxpxhfvx8e.webp";
+import img from "../.../../../../../public/assets/triexgagykxxpxhfvx8e.webp";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { IoClose } from "react-icons/io5";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
-import SaveAndCancel from "../SaveAndCancel";
+import SaveAndCancel from "@/src/components/common/SaveAndCancel";
 import { GoArrowUpRight } from "react-icons/go";
 import { MdArrowOutward } from "react-icons/md";
 
@@ -76,9 +75,9 @@ const Header = () => {
                         {/* ===================== RESOURCES MENU ===================== */}
                         {menu.label === "Resources" ? (
                           <div className="mx-auto ml-[48%] w-fit rounded-xl bg-[#FFFFFF] p-4 shadow-lg">
-                            <ul className="space-y-2">
+                            <div className="space-y-2">
                               {menu.subItems.map((item, i) => (
-                                <li key={i}>
+                                <div key={i}>
                                   <Link
                                     href={item.href}
                                     className="group flex items-center gap-2 text-xs text-gray-600 hover:text-[#F28F17]"
@@ -90,9 +89,9 @@ const Header = () => {
                                       className="translate-x-[-4px] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
                                     />
                                   </Link>
-                                </li>
+                                </div>
                               ))}
-                            </ul>
+                            </div>
                           </div>
                         ) : (
                           /* ===================== SERVICES MEGA MENU ===================== */
@@ -110,10 +109,10 @@ const Header = () => {
                                     </Link>
 
                                     {"subItems" in sub && (
-                                      <ul className="space-y-2">
+                                      <div className="space-y-2">
                                         {sub.subItems?.map(
                                           (item: any, j: number) => (
-                                            <li>
+                                            <div key={j}>
                                               <Link
                                                 href={item.href}
                                                 className="group flex items-center gap-2 text-xs text-gray-600 hover:text-[#F28F17]"
@@ -125,10 +124,10 @@ const Header = () => {
                                                   className="translate-x-[-4px] opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100"
                                                 />
                                               </Link>
-                                            </li>
+                                            </div>
                                           ),
                                         )}
-                                      </ul>
+                                      </div>
                                     )}
                                   </div>
                                 ))}

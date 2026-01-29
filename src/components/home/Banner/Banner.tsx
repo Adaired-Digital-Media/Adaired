@@ -246,6 +246,7 @@ const Banner = () => {
                   {griphData?.map((item, idx) => {
                     return (
                       <div
+                      key={idx}
                         className={`h-[3.125rem] ${idx == 1 && "animate-step1"} ${idx == 2 && "animate-step2"} ${idx == 3 && "animate-step3"} ${idx == 4 && "animate-step4"} rounded-[0.25rem] border-[1px] border-[#000000]/20 bg-[#FFFFFF]/80 px-[0.5rem] pb-2`}
                       >
                         <div className="flex justify-between">
