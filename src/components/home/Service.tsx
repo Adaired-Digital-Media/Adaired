@@ -138,7 +138,7 @@ const Service = () => {
                 : "-translate-x-16 opacity-0"
             }`}
           >
-            <div className="sticky top-[15rem] h-[33rem] rounded-xl bg-white p-[1rem] xl:h-[35rem] xl:p-[2rem]">
+            <div className="sticky top-[15rem] h-[33rem] rounded-xl bg-[#FFFFFF] p-[1rem] xl:h-[35rem] xl:p-[2rem]">
               {services?.map((service, idx) => {
                 const isFirst = idx === 0;
                 const isLast = idx === services.length - 1;
@@ -186,7 +186,7 @@ const Service = () => {
                         {(activeTab === idx || hoveredTab === idx) && (
                           <MdArrowOutward
                             size={35}
-                            className="shrink-0 rounded-full bg-white p-2 text-[#FB9100] transition-transform duration-700 ease-out"
+                            className="shrink-0 rounded-full bg-[#FFFFFF] p-2 text-[#FB9100] transition-transform duration-700 ease-out"
                           />
                         )}
                       </div>
@@ -219,7 +219,7 @@ const Service = () => {
                   ref={(el) => {
                     sectionRefs.current[idx] = el;
                   }}
-                  className="block gap-[2rem] rounded-xl border-[1px] border-[#00000033]/20 bg-white p-8"
+                  className="block gap-[2rem] rounded-xl border-[1px] border-[#00000033]/20 bg-[#FFFFFF] p-8"
                 >
                   <div className="gap-2 lg:flex">
                     {/* LEFT CONTENT */}

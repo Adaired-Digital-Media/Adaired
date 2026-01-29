@@ -55,7 +55,7 @@ const Expect = () => {
                     className={`rounded-3xl border-[1px] border-[#00000026]/10 p-[1.8rem] transition-all duration-700 lg:p-[1rem] xl:px-[1.75rem] xl:py-[1.5rem] 1360:p-[1rem] 1400:p-[1rem] ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'} ${
                       isHovered
                         ? 'border-[0px] border-[#FFFFFF] bg-gradient-to-br from-[#FB9100] to-[#000000]'
-                        : 'bg-white'
+                        : 'bg-[#FFFFFF]'
                     } `}
                   >
                     <div

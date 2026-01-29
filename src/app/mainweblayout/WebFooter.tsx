@@ -57,7 +57,7 @@ const WebFooter = () => {
                 <div className="mt-4 flex gap-2">
                   <Link
                     href={process.env.NEXT_PUBLIC_FACEBOOK_URL || "/"}
-                    className="group/fb hover:bg-theme-orange rounded-full bg-white p-2"
+                    className="group/fb hover:bg-theme-orange rounded-full bg-[#FFFFFF] p-2"
                   >
                     <Icons.Facebook className="text-[#1B5A96] group-hover/fb:text-[#FB9100]" />
                     <span className="sr-only">
@@ -66,7 +66,7 @@ const WebFooter = () => {
                   </Link>
                   <Link
                     href={process.env.NEXT_PUBLIC_TWITTER_URL || "/"}
-                    className="group/x hover:bg-theme-orange rounded-full bg-white p-2"
+                    className="group/x hover:bg-theme-orange rounded-full bg-[#FFFFFF] p-2"
                   >
                     <Icons.Twitter className="text-[#1B5A96] group-hover/x:text-[#FB9100]" />
                     <span className="sr-only">
@@ -75,7 +75,7 @@ const WebFooter = () => {
                   </Link>
                   <Link
                     href={process.env.NEXT_PUBLIC_INSTAGRAM_URL || "/"}
-                    className="group/insta hover:bg-theme-orange rounded-full bg-white p-2"
+                    className="group/insta hover:bg-theme-orange rounded-full bg-[#FFFFFF] p-2"
                   >
                     <Icons.Instagram className="text-[#1B5A96] group-hover/insta:text-[#FB9100]" />
                     <span className="sr-only">
@@ -84,7 +84,7 @@ const WebFooter = () => {
                   </Link>
                   <Link
                     href={process.env.NEXT_PUBLIC_LINKEDIN_URL || "/"}
-                    className="group/in hover:bg-theme-orange rounded-full bg-white p-2"
+                    className="group/in hover:bg-theme-orange rounded-full bg-[#FFFFFF] p-2"
                   >
                     <Icons.LinkedIn className="text-[#1B5A96] group-hover/in:text-[#FB9100]" />
                     <span className="sr-only">
@@ -201,7 +201,7 @@ const WebFooter = () => {
               {/* <NewsLetter /> */}
               <div className="relative mt-4">
                 <InputField
-                  className="w-full !rounded-full bg-white text-[15px] font-[300]"
+                  className="w-full !rounded-full bg-[#FFFFFF] text-[15px] font-[300]"
                   name={"email"}
                   value={inputVal.email}
                   placeholder="Email Address"
@@ -224,7 +224,7 @@ const WebFooter = () => {
               <div className="mt-4 flex gap-2">
                 <Link
                   href={process.env.NEXT_PUBLIC_FACEBOOK_URL || "/"}
-                  className="rounded-lg bg-white p-2"
+                  className="rounded-lg bg-[#FFFFFF] p-2"
                 >
                   <Icons.Facebook className="text-[#1B5A96]" />
                   <span className="sr-only">
@@ -233,7 +233,7 @@ const WebFooter = () => {
                 </Link>
                 <Link
                   href={process.env.NEXT_PUBLIC_TWITTER_URL || "/"}
-                  className="rounded-lg bg-white p-2"
+                  className="rounded-lg bg-[#FFFFFF] p-2"
                 >
                   <Icons.Twitter className="text-[#1B5A96]" />
                   <span className="sr-only">
@@ -242,7 +242,7 @@ const WebFooter = () => {
                 </Link>
                 <Link
                   href={process.env.NEXT_PUBLIC_INSTAGRAM_URL || "/"}
-                  className="rounded-lg bg-white p-2"
+                  className="rounded-lg bg-[#FFFFFF] p-2"
                 >
                   <Icons.Instagram className="text-[#1B5A96]" />
                   <span className="sr-only">
@@ -251,7 +251,7 @@ const WebFooter = () => {
                 </Link>
                 <Link
                   href={process.env.NEXT_PUBLIC_LINKEDIN_URL || "/"}
-                  className="rounded-lg bg-white p-2"
+                  className="rounded-lg bg-[#FFFFFF] p-2"
                 >
                   <Icons.LinkedIn className="text-[#1B5A96]" />
                   <span className="sr-only">
@@ -277,7 +277,7 @@ const WebFooter = () => {
         </MaxWidthWrapper>
       </footer>
       <MaxWidthWrapper>
-        <div className="flex flex-col-reverse items-center justify-center bg-white py-1 text-center text-black md:flex-row md:justify-center">
+        <div className="flex flex-col-reverse items-center justify-center bg-[#FFFFFF] py-1 text-center text-black md:flex-row md:justify-center">
           <div className="font text-xxs">
             Copyright © {new Date().getFullYear()} - AdAired Digital Media
           </div>

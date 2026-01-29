@@ -298,7 +298,7 @@ const Banner = () => {
               alt=""
               className={`absolute right-0 top-[-4rem] h-[6.875rem] w-[10.563rem] transition-opacity transition-transform duration-700 ease-in-out md:top-[2rem] md:h-[13rem] md:w-[20rem] lg:top-[30%] lg:h-[10.25rem] lg:w-[15.25rem] xl:top-[0rem] xl:h-[15.25rem] xl:w-[24.25rem] 1366:top-[8rem] 1366:h-[10rem] 1366:w-[18rem] 1400:top-[5rem] 1400:h-[12rem] 1400:w-[20rem] 1680:top-[1.5rem] 3xl:h-[15.25rem] 3xl:w-[24.25rem] ${
                 active === "img2"
-                  ? "z-30 translate-x-[-50%] translate-y-[50%] scale-105 bg-white/80 opacity-100 backdrop-blur-md md:translate-x-[-60%] md:translate-y-[75%] lg:translate-x-[-45%] lg:translate-y-[80%] xl:translate-x-[-50%] xl:translate-y-[100%] 1400:translate-x-[-40%] 1600:translate-x-[-50%] 1680:translate-x-[-60%] 1680:translate-y-[110%] 3xl:translate-x-[-49%] 3xl:translate-y-[90%]"
+                  ? "z-30 translate-x-[-50%] translate-y-[50%] scale-105 bg-[#FFFFFF]/80 opacity-100 backdrop-blur-md md:translate-x-[-60%] md:translate-y-[75%] lg:translate-x-[-45%] lg:translate-y-[80%] xl:translate-x-[-50%] xl:translate-y-[100%] 1400:translate-x-[-40%] 1600:translate-x-[-50%] 1680:translate-x-[-60%] 1680:translate-y-[110%] 3xl:translate-x-[-49%] 3xl:translate-y-[90%]"
                   : active
                     ? "z-10 translate-x-0 translate-y-0 scale-100 opacity-40"
                     : "z-10 translate-x-0 translate-y-0 scale-100 opacity-100"

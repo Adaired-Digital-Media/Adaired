@@ -75,7 +75,7 @@ const Header = () => {
                       >
                         {/* ===================== RESOURCES MENU ===================== */}
                         {menu.label === "Resources" ? (
-                          <div className="mx-auto ml-[48%] w-fit rounded-xl bg-white p-4 shadow-lg">
+                          <div className="mx-auto ml-[48%] w-fit rounded-xl bg-[#FFFFFF] p-4 shadow-lg">
                             <ul className="space-y-2">
                               {menu.subItems.map((item, i) => (
                                 <li key={i}>
@@ -96,7 +96,7 @@ const Header = () => {
                           </div>
                         ) : (
                           /* ===================== SERVICES MEGA MENU ===================== */
-                          <div className="mx-auto max-w-[1400px] rounded-2xl bg-white p-10 shadow-lg">
+                          <div className="mx-auto max-w-[1400px] rounded-2xl bg-[#FFFFFF] p-10 shadow-lg">
                             <div className="grid grid-cols-4 gap-4">
                               {/* SERVICES */}
                               <div className="col-span-3 grid grid-cols-3 gap-8">
@@ -225,7 +225,7 @@ const Header = () => {
 
           {/* DRAWER */}
           <div
-            className={`absolute right-0 top-0 h-full w-full transform bg-white p-5 transition-transform duration-300 ease-in-out md:w-[80%] ${show ? "translate-x-0" : "translate-x-full"} `}
+            className={`absolute right-0 top-0 h-full w-full transform bg-[#FFFFFF] p-5 transition-transform duration-300 ease-in-out md:w-[80%] ${show ? "translate-x-0" : "translate-x-full"} `}
           >
             {/* HEADER */}
             <div className="mb-6 flex items-center justify-between">

@@ -48,7 +48,7 @@ const PhoneInputField = ({
           </div>
 
           {open && (
-            <div className="absolute z-20 mt-2 max-h-60 w-[18rem] overflow-auto rounded-md bg-white shadow">
+            <div className="absolute z-20 mt-2 max-h-60 w-[18rem] overflow-auto rounded-md bg-[#FFFFFF] shadow">
               {countries.map((c) => (
                 <div
                   key={c.code}

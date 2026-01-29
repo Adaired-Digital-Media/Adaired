@@ -1,5 +1,5 @@
 import { ServiceSectionData } from "@/src/@core/data/website/Homepage";
-import Banner from "@/src/components/common/Banner/Banner";
+import Banner from "@/src/components/home/Banner/Banner";
 import About from "@/src/components/home/About";
 import Blogs from "@/src/components/home/Blogs";
 import Certificate from "@/src/components/home/Certificate";
