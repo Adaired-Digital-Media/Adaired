@@ -168,9 +168,9 @@ const CaseStudies = () => {
                   Challanges
                 </h3>
                 <div className="text-[#797979]">
-                  {caseStudiesData?.challengesAndSolutions?.map((x: any) => {
+                  {caseStudiesData?.challengesAndSolutions?.map((x: any, idx:number) => {
                     return (
-                      <div className="flex gap-2 py-1">
+                      <div key={idx} className="flex gap-2 py-1">
                         <span className="my-auto">
                           <IoCheckmarkCircle
                             fontSize={22}

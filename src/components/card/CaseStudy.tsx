@@ -32,9 +32,12 @@ const CaseStudy = ({
         className="transition-transform duration-500 ease-in-out hover:scale-110"
       />
       <div className="flex gap-2 py-[1rem]">
-        {labels?.map((label: any) => {
+        {labels?.map((label: any, idx: number) => {
           return (
-            <span className="rounded-full bg-[#FFFFFF] px-[1rem] py-[0.25rem] text-[12px] uppercase text-[#000000]">
+            <span
+              key={idx}
+              className="rounded-full bg-[#FFFFFF] px-[1rem] py-[0.25rem] text-[12px] uppercase text-[#000000]"
+            >
               {label ?? "Agency Analytics', 'Canva"}
             </span>
           );
