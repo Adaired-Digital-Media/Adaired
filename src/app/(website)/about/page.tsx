@@ -8,6 +8,7 @@ import CldImage from "@/src/components/CloudinaryImageComponent";
 import { BaseURL } from "@/src/baseUrl";
 import Heading from "@/src/components/common/Heading";
 import Blogs from "@/src/components/home/Blogs";
+import AboutComponent from "@/src/app/(website)/components/AboutComponent";
 
 export const metadata: Metadata = {
   title: "Unveiling Adaired: Our History, Team, and Vision | Learn About Us",
@@ -41,11 +42,15 @@ const About = async () => {
   const blogs = await getBlogsData();
   return (
     <div>
-      <PageBanner title="About Us" />
-      <IntroSection />
-      <WorkStation />
+      <PageBanner subTitle="About Us" title="Get to Know Us" />
+
+      {/* New */}
+      <AboutComponent />
+
+      {/* <IntroSection /> */}
+      {/* <WorkStation /> */}
       {/* <ProcessSection /> */}
-      <Testimonial />
+      {/* <Testimonial /> */}
       <Blogs />
       {/* <BlogCards blogs={blogs} /> */}
     </div>

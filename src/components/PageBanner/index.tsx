@@ -27,7 +27,7 @@ const PageBanner = ({ subTitle, title }: any) => {
       </div>
 
       <MaxWidthWrapper>
-        <Heading subTitle={subTitle} title={title} span={""} />
+        <Heading subTitle={subTitle} title={title} span={""}/>
       </MaxWidthWrapper>
     </div>
   );
